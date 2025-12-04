@@ -1,4 +1,4 @@
-server.port: ${SERVER_PORT:9098}
+server.port: ${SERVER_PORT:9088}
 application-properties:
   binding-group: spring-base
   # One single point for reusability
