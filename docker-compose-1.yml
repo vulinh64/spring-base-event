@@ -1,0 +1,59 @@
+services:
+  spring-base-event:
+    networks:
+      - spring-base-event-network
+    image: 'spring-base-event:1.0.0'
+    container_name: spring-base-event
+    build:
+      context: .
+      dockerfile: ./Dockerfile-1
+    ports:
+      - "9088:9088"
+    environment:
+      - SERVER_PORT=9088
+      - MARIADB_HOST=mariadb
+      - RABBITMQ_HOST=rabbitmq
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+  mariadb:
+    networks:
+      - spring-base-event-network
+    image: mariadb:12.1.2-noble
+    container_name: mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      - MARIADB_ROOT_PASSWORD=123456
+      - MARIADB_DATABASE=myspringeventdatabase
+    volumes:
+      - mariadb-volume:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+  rabbitmq:
+    networks:
+      - spring-base-event-network
+    image: 'rabbitmq:4.2.1-management-alpine'
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmq
+      - RABBITMQ_DEFAULT_PASS=123456
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "-q", "ping" ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+volumes:
+  mariadb-volume:
+    name: mariadb-volume
+networks:
+  spring-base-event-network:
+    driver: bridge
