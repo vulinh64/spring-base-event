@@ -44,7 +44,7 @@ ENV PATH=$JAVA_HOME/bin:$JAVA_HOME/lib:$PATH
 ENV USER=springuser
 ENV GROUP=springgroup
 ENV WORKDIR=app
-ENV APP_NAME=app.jar
+ENV APP_NAME=app-event.jar
 
 COPY --from=build /jre-minimalist $JAVA_HOME
 
@@ -65,4 +65,4 @@ ENTRYPOINT ["java", \
     "-XX:InitialRAMPercentage=50.0", \
     "-XX:MaxMetaspaceSize=512m", \
     "-jar", \
-    "app.jar"]
+    "app-event.jar"]
