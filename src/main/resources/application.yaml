@@ -6,11 +6,12 @@ application-properties:
     new-comment-topic: new-comment
     new-post-topic: new-post
     new-subscriber-topic: new-subscriber
+    new-post-following-topic: new-post-following
 spring:
   application.name: spring-base-event
   cloud:
     function:
-      definition: newPost;newSubscriber;newComment
+      definition: newPost;newSubscriber;newComment;newPostFollowing
     stream:
       bindings:
         newPost-in-0:
@@ -21,6 +22,9 @@ spring:
           group: ${application-properties.binding-group}
         newComment-in-0:
           destination: ${application-properties.message-topic.new-comment-topic}
+          group: ${application-properties.binding-group}
+        newPostFollowing-in-0:
+          destination: ${application-properties.message-topic.new-post-following-topic}
           group: ${application-properties.binding-group}
       default-binder: rabbit
   datasource:

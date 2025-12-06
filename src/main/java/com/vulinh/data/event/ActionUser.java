@@ -1,7 +1,8 @@
 package com.vulinh.data.event;
 
+import module java.base;
+
 import com.vulinh.data.UuidIdentifiable;
-import java.util.UUID;
 import lombok.Builder;
 import lombok.With;
 

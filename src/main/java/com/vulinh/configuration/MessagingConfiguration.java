@@ -1,10 +1,8 @@
 package com.vulinh.configuration;
 
-import com.vulinh.data.event.EventMessageWrapper;
-import com.vulinh.data.event.NewCommentEvent;
-import com.vulinh.data.event.NewPostEvent;
-import com.vulinh.data.event.NewSubscriberEvent;
-import java.util.function.Consumer;
+import module java.base;
+
+import com.vulinh.data.event.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,5 +24,10 @@ public class MessagingConfiguration {
   @Bean
   public Consumer<EventMessageWrapper<NewSubscriberEvent>> newSubscriber() {
     return event -> log.info("New subscriber event received: {}", event);
+  }
+
+  @Bean
+  public Consumer<EventMessageWrapper<NewPostFollowingEvent>> newPostFollowing() {
+    return event -> log.info("New post following event received: {}", event);
   }
 }
