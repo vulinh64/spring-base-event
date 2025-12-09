@@ -23,7 +23,7 @@ MARIADB_CONTAINER_NAME="mariadb"
 MARIADB_NAME="mariadb"
 MARIADB_TAG="12.1.2-noble"
 MARIADB_IMAGE="$MARIADB_NAME:$MARIADB_TAG"
-MARIADB_COMMAND="docker run --detach --name $MARIADB_CONTAINER_NAME -e MARIADB_ROOT_PASSWORD=123456 -e MARIADB_DATABASE=myspringeventdatabase -p 3306:3306 -v mariadb-volume:/var/lib/mysql $MARIADB_IMAGE"
+MARIADB_COMMAND="docker run --detach --name $MARIADB_CONTAINER_NAME -e MARIADB_ROOT_PASSWORD=123456 -e MARIADB_DATABASE=myspringeventdatabase -p 3306:3306 -v mariadb-volume:/var/lib/mysql $MARIADB_IMAGE --lower_case_table_names=1"
 
 echo "Checking MariaDB container [$MARIADB_CONTAINER_NAME]..."
 if ! docker ps -a --format '{{.Names}}' | grep -w "$MARIADB_CONTAINER_NAME" > /dev/null; then
