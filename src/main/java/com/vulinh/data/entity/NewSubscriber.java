@@ -12,11 +12,10 @@ import lombok.*;
 @Setter
 @ToString
 @Builder
-public class NewComment extends BaseEventEntity {
+public class NewSubscriber extends BaseEventEntity {
 
-  @Serial private static final long serialVersionUID = 7260837485797588775L;
+  @Serial private static final long serialVersionUID = 500959105883077643L;
 
-  UUID postId;
-  String title;
-  String content;
+  UUID subscribedUserId;
+  String subscribedUsername;
 }
