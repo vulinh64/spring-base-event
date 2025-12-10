@@ -2,12 +2,15 @@
 --changeset vulinh:20251209-0001
 CREATE TABLE new_post
 (
-    id              UUID NOT NULL PRIMARY KEY,
-    post_id         UUID,
-    title           VARCHAR(255),
-    excerpt         TEXT,
-    action_user_id  UUID,
-    action_username VARCHAR(255),
-    timestamp       TIMESTAMP,
-    created_date    TIMESTAMP
+    id                  UUID        NOT NULL PRIMARY KEY,
+    post_id             UUID,
+    title               VARCHAR(255),
+    excerpt             TEXT,
+    status              VARCHAR(15) NOT NULL DEFAULT 'RECEIVED',
+    retry_count         TINYINT UNSIGNED NOT NULL DEFAULT 0,
+    action_user_id      UUID,
+    action_username     VARCHAR(255),
+    timestamp           TIMESTAMP,
+    created_date        TIMESTAMP,
+    last_processed_date TIMESTAMP
 );

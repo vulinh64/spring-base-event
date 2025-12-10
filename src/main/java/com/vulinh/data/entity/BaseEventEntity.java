@@ -3,12 +3,15 @@ package com.vulinh.data.entity;
 import module java.base;
 
 import com.vulinh.data.UuidIdentifiable;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @MappedSuperclass
 @Getter
@@ -25,6 +28,13 @@ public abstract class BaseEventEntity implements UuidIdentifiable, Serializable 
 
   UUID actionUserId;
   String actionUsername;
+
+  @Enumerated(EnumType.STRING)
+  EventStatus status = EventStatus.RECEIVED;
+
+  @LastModifiedDate Instant lastProcessedDate;
+
+  int retryCount = 0;
 
   @Override
   public final boolean equals(Object o) {
