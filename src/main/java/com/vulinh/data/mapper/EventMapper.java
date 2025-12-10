@@ -1,10 +1,7 @@
 package com.vulinh.data.mapper;
 
 import com.vulinh.data.entity.*;
-import com.vulinh.data.event.EventMessageWrapper;
-import com.vulinh.data.event.NewCommentEvent;
-import com.vulinh.data.event.NewPostEvent;
-import com.vulinh.data.event.NewSubscriberEvent;
+import com.vulinh.data.event.*;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -44,7 +41,7 @@ public interface EventMapper {
   @Mapping(target = "postId", source = "event.data.postId")
   @Mapping(target = "actionUsername", source = "event.actionUser.username")
   @Mapping(target = "actionUserId", source = "event.actionUser.id")
-  NewPostFollowing toNewPostFollowingEntity(EventMessageWrapper<NewPostEvent> event);
+  NewPostFollowing toNewPostFollowingEntity(EventMessageWrapper<NewPostFollowingEvent> event);
 
   @Mapping(target = "status", expression = "java(EventStatus.RECEIVED)")
   @Mapping(target = "retryCount", ignore = true)

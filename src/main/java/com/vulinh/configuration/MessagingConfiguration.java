@@ -3,6 +3,7 @@ package com.vulinh.configuration;
 import module java.base;
 
 import com.vulinh.data.event.*;
+import com.vulinh.service.BaseEventService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,22 +13,26 @@ import org.springframework.context.annotation.Configuration;
 public class MessagingConfiguration {
 
   @Bean
-  public Consumer<EventMessageWrapper<NewPostEvent>> newPost() {
-    return event -> log.info("New post event received: {}", event);
+  public Consumer<EventMessageWrapper<NewCommentEvent>> newComment(
+      BaseEventService<NewCommentEvent> newCommentEventService) {
+    return newCommentEventService::processEvent;
   }
 
   @Bean
-  public Consumer<EventMessageWrapper<NewCommentEvent>> newComment() {
-    return event -> log.info("New comment event received: {}", event);
+  public Consumer<EventMessageWrapper<NewPostEvent>> newPost(
+      BaseEventService<NewPostEvent> newPostEventService) {
+    return newPostEventService::processEvent;
   }
 
   @Bean
-  public Consumer<EventMessageWrapper<NewSubscriberEvent>> newSubscriber() {
-    return event -> log.info("New subscriber event received: {}", event);
+  public Consumer<EventMessageWrapper<NewPostFollowingEvent>> newPostFollowing(
+      BaseEventService<NewPostFollowingEvent> newPostFollowingEventService) {
+    return newPostFollowingEventService::processEvent;
   }
 
   @Bean
-  public Consumer<EventMessageWrapper<NewPostFollowingEvent>> newPostFollowing() {
-    return event -> log.info("New post following event received: {}", event);
+  public Consumer<EventMessageWrapper<NewSubscriberEvent>> newSubscriber(
+      BaseEventService<NewSubscriberEvent> newSubscriberEventService) {
+    return newSubscriberEventService::processEvent;
   }
 }
