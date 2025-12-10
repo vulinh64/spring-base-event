@@ -8,9 +8,12 @@ import com.vulinh.data.event.NewSubscriberEvent;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
 @Mapper(builder = @Builder(disableBuilder = true), imports = EventStatus.class)
 public interface EventMapper {
+
+  EventMapper INSTANCE = Mappers.getMapper(EventMapper.class);
 
   @Mapping(target = "status", expression = "java(EventStatus.RECEIVED)")
   @Mapping(target = "retryCount", ignore = true)

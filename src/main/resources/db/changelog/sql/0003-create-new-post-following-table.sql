@@ -8,7 +8,7 @@ CREATE TABLE new_post_following
     retry_count         TINYINT UNSIGNED NOT NULL DEFAULT 0,
     action_user_id      UUID,
     action_username     VARCHAR(255),
-    timestamp           TIMESTAMP,
-    created_date        TIMESTAMP,
-    last_processed_date TIMESTAMP
+    timestamp           DATETIME,
+    created_date        DATETIME,
+    last_processed_date DATETIME
 );

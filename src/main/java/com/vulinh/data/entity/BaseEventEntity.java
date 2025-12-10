@@ -3,19 +3,18 @@ package com.vulinh.data.entity;
 import module java.base;
 
 import com.vulinh.data.UuidIdentifiable;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @MappedSuperclass
 @Getter
 @Setter
+@EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEventEntity implements UuidIdentifiable, Serializable {
 
   @Serial private static final long serialVersionUID = -1241700010477084168L;
