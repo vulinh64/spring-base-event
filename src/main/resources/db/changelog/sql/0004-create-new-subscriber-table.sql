@@ -2,15 +2,15 @@
 --changeset vulinh:20251209-0003
 CREATE TABLE new_subscriber
 (
-    id                  UUID        NOT NULL PRIMARY KEY,
-    subscriber_user_id  UUID,
-    subscriber_username VARCHAR(255),
-    status              VARCHAR(15) NOT NULL DEFAULT 'RECEIVED',
-    retry_count         TINYINT UNSIGNED NOT NULL DEFAULT 0,
-    action_user_id      UUID,
-    action_username     VARCHAR(255),
-    timestamp           DATETIME,
-    created_date        DATETIME,
-    last_processed_date DATETIME,
-    failure_reason      TEXT
+    subscribed_user_id  UUID,
+    action_user_id      UUID        NOT NULL,
+    action_username     VARCHAR(100),
+    subscribed_username VARCHAR(100),
+    status              VARCHAR(20) NOT NULL DEFAULT 'RECEIVED',
+    retry_count         INT         NOT NULL DEFAULT 0,
+    failure_reason      TEXT,
+    `timestamp`         DATETIME(6),
+    created_date_time   DATETIME(6),
+    updated_date_time   DATETIME(6),
+    PRIMARY KEY (subscribed_user_id, action_user_id)
 );

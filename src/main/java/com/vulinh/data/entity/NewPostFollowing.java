@@ -13,10 +13,12 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@Builder
 public class NewPostFollowing extends BaseAssociatedEvent<NewPostFollowingId> {
 
   @Serial private static final long serialVersionUID = 894118846005326877L;
 
   @Id NewPostFollowingId id;
+
+  String title;
+  String excerpt;
 }

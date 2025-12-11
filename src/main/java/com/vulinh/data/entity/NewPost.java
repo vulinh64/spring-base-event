@@ -11,7 +11,6 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@Builder
 public class NewPost extends BaseNexusEvent {
 
   @Serial private static final long serialVersionUID = 7972890117944414414L;

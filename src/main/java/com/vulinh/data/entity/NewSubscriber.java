@@ -13,10 +13,11 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@Builder
 public class NewSubscriber extends BaseAssociatedEvent<NewSubscriberId> {
 
   @Serial private static final long serialVersionUID = -9010837966738525256L;
 
   @Id NewSubscriberId id;
+
+  String subscribedUsername;
 }
