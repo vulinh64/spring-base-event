@@ -1,7 +1,7 @@
 package com.vulinh.service;
 
 import com.vulinh.data.event.EventMessageWrapper;
-import com.vulinh.data.event.NewPostEvent;
+import com.vulinh.data.event.payload.NewPostEvent;
 import com.vulinh.data.mapper.EventMapper;
 import com.vulinh.data.repository.NewPostRepository;
 import lombok.RequiredArgsConstructor;

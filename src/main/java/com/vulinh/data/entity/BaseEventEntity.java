@@ -35,6 +35,8 @@ public abstract class BaseEventEntity implements UuidIdentifiable, Serializable 
 
   int retryCount = 0;
 
+  String failureReason;
+
   @Override
   public final boolean equals(Object o) {
     if (this == o) {

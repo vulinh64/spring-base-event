@@ -1,4 +1,4 @@
-package com.vulinh.data.event;
+package com.vulinh.data.event.payload;
 
 import module java.base;
 

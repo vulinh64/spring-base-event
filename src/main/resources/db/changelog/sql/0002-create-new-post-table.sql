@@ -12,5 +12,6 @@ CREATE TABLE new_post
     action_username     VARCHAR(255),
     timestamp           DATETIME,
     created_date        DATETIME,
-    last_processed_date DATETIME
+    last_processed_date DATETIME,
+    failure_reason      TEXT
 );

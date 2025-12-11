@@ -2,6 +2,10 @@ package com.vulinh.data.mapper;
 
 import com.vulinh.data.entity.*;
 import com.vulinh.data.event.*;
+import com.vulinh.data.event.payload.NewCommentEvent;
+import com.vulinh.data.event.payload.NewPostEvent;
+import com.vulinh.data.event.payload.NewPostFollowingEvent;
+import com.vulinh.data.event.payload.NewSubscriberEvent;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,6 +16,7 @@ public interface EventMapper {
 
   EventMapper INSTANCE = Mappers.getMapper(EventMapper.class);
 
+  @Mapping(target = "failureReason", ignore = true)
   @Mapping(target = "status", expression = "java(EventStatus.RECEIVED)")
   @Mapping(target = "retryCount", ignore = true)
   @Mapping(target = "lastProcessedDate", ignore = true)
@@ -23,6 +28,7 @@ public interface EventMapper {
   @Mapping(target = "content", source = "event.data.content")
   NewComment toNewCommentEntity(EventMessageWrapper<NewCommentEvent> event);
 
+  @Mapping(target = "failureReason", ignore = true)
   @Mapping(target = "status", expression = "java(EventStatus.RECEIVED)")
   @Mapping(target = "retryCount", ignore = true)
   @Mapping(target = "lastProcessedDate", ignore = true)
@@ -34,6 +40,7 @@ public interface EventMapper {
   @Mapping(target = "excerpt", source = "event.data.excerpt")
   NewPost toNewPostEntity(EventMessageWrapper<NewPostEvent> event);
 
+  @Mapping(target = "failureReason", ignore = true)
   @Mapping(target = "status", expression = "java(EventStatus.RECEIVED)")
   @Mapping(target = "retryCount", ignore = true)
   @Mapping(target = "lastProcessedDate", ignore = true)
@@ -43,6 +50,7 @@ public interface EventMapper {
   @Mapping(target = "actionUserId", source = "event.actionUser.id")
   NewPostFollowing toNewPostFollowingEntity(EventMessageWrapper<NewPostFollowingEvent> event);
 
+  @Mapping(target = "failureReason", ignore = true)
   @Mapping(target = "status", expression = "java(EventStatus.RECEIVED)")
   @Mapping(target = "retryCount", ignore = true)
   @Mapping(target = "lastProcessedDate", ignore = true)

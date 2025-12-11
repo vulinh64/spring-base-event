@@ -3,6 +3,10 @@ package com.vulinh.configuration;
 import module java.base;
 
 import com.vulinh.data.event.*;
+import com.vulinh.data.event.payload.NewCommentEvent;
+import com.vulinh.data.event.payload.NewPostEvent;
+import com.vulinh.data.event.payload.NewPostFollowingEvent;
+import com.vulinh.data.event.payload.NewSubscriberEvent;
 import com.vulinh.service.BaseEventService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
