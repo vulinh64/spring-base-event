@@ -1,12 +1,13 @@
-package com.vulinh.data.entity2.ids;
+package com.vulinh.data.entity.ids;
+
+import module java.base;
 
 import com.vulinh.data.Identifiable;
 import jakarta.persistence.Embeddable;
 import java.io.Serializable;
-import java.util.UUID;
 
 @Embeddable
-public record NewSubscriberId(UUID actionUserId, UUID subscribedUserId)
+public record NewSubscriberId(UUID subscribedUserId, UUID actionUserId)
     implements Serializable, Identifiable<NewSubscriberId> {
 
   @Override

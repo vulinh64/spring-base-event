@@ -2,8 +2,9 @@ package com.vulinh.data.entity;
 
 import module java.base;
 
-import com.vulinh.data.UuidIdentifiable;
-import jakarta.persistence.*;
+import com.vulinh.data.Identifiable;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.proxy.HibernateProxy;
@@ -12,30 +13,19 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-@EntityListeners(AuditingEntityListener.class)
-public abstract class BaseEventEntity implements UuidIdentifiable, Serializable {
+public abstract class BaseAuditableEvent<I extends Serializable>
+    implements Identifiable<I>, Serializable {
 
-  @Serial private static final long serialVersionUID = -1241700010477084168L;
-
-  @Id UUID id;
+  @Serial private static final long serialVersionUID = -3581289558183962649L;
 
   Instant timestamp;
 
-  @CreatedDate Instant createdDate;
+  @CreatedDate Instant createdDateTime;
 
-  UUID actionUserId;
-  String actionUsername;
-
-  @Enumerated(EnumType.STRING)
-  EventStatus status = EventStatus.RECEIVED;
-
-  @LastModifiedDate Instant lastProcessedDate;
-
-  int retryCount = 0;
-
-  String failureReason;
+  @LastModifiedDate Instant updatedDateTime;
 
   @Override
   public final boolean equals(Object o) {
@@ -46,8 +36,8 @@ public abstract class BaseEventEntity implements UuidIdentifiable, Serializable 
     var id = getId();
 
     return id != null
-        && o instanceof BaseEventEntity other
         && getEffectiveClass(this) == getEffectiveClass(o)
+        && o instanceof BaseAuditableEvent<?> other
         && Objects.equals(id, other.getId());
   }
 

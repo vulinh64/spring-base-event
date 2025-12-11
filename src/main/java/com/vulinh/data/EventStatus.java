@@ -1,4 +1,4 @@
-package com.vulinh.data.entity;
+package com.vulinh.data;
 
 public enum EventStatus {
   RECEIVED, // First received
