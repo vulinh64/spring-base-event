@@ -2,7 +2,9 @@ package com.vulinh.data.entity;
 
 import module java.base;
 
+import com.vulinh.data.entity.ids.NewSubscriberId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.*;
 
 @Entity
@@ -12,10 +14,9 @@ import lombok.*;
 @Setter
 @ToString
 @Builder
-public class NewSubscriber extends BaseEventEntity {
+public class NewSubscriber extends BaseAssociatedEvent<NewSubscriberId> {
 
-  @Serial private static final long serialVersionUID = 500959105883077643L;
+  @Serial private static final long serialVersionUID = -9010837966738525256L;
 
-  UUID subscribedUserId;
-  String subscribedUsername;
+  @Id NewSubscriberId id;
 }
