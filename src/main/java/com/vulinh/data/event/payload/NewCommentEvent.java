@@ -8,4 +8,5 @@ import lombok.With;
 @Builder
 @With
 public record NewCommentEvent(
-    UUID postId, String title, String excerpt, UUID commentId, String content) {}
+    UUID postId, String title, String excerpt, UUID commentId, String content)
+    implements WithPostData, WithCommentData {}

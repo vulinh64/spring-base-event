@@ -1,7 +1,8 @@
 package com.vulinh.service;
 
+import module java.base;
+
 import com.vulinh.data.event.EventMessageWrapper;
-import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.lang.NonNull;
@@ -19,9 +20,7 @@ public abstract class BaseEventService<T> {
     processEventInternal(event);
   }
 
-  protected void ensureValidData(@NonNull T data) {
-    // NOOP
-  }
+  protected abstract void ensureValidData(@NonNull T data);
 
   protected abstract void processEventInternal(EventMessageWrapper<T> event);
 

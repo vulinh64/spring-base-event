@@ -7,4 +7,5 @@ import lombok.With;
 
 @Builder
 @With
-public record NewPostFollowingEvent(UUID postId, String title, String excerpt) {}
+public record NewPostFollowingEvent(UUID postId, String title, String excerpt)
+    implements WithPostData {}
