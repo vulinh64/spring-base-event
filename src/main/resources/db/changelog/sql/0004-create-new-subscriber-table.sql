@@ -7,10 +7,9 @@ CREATE TABLE new_subscriber
     action_username     VARCHAR(100),
     subscribed_username VARCHAR(100),
     status              VARCHAR(20) NOT NULL DEFAULT 'RECEIVED',
-    retry_count         INT         NOT NULL DEFAULT 0,
-    failure_reason      TEXT,
-    `timestamp`         DATETIME(6),
     created_date_time   DATETIME(6),
     updated_date_time   DATETIME(6),
+    event_id            UUID,
+    `timestamp`         DATETIME(6),
     PRIMARY KEY (subscribed_user_id, action_user_id)
 );

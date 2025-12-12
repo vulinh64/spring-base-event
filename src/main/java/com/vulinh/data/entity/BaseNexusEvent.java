@@ -2,6 +2,9 @@ package com.vulinh.data.entity;
 
 import module java.base;
 
+import com.vulinh.data.EventStatus;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
@@ -18,4 +21,10 @@ public abstract class BaseNexusEvent extends BaseAuditableEvent<UUID> {
 
   UUID actionUserId;
   String actionUsername;
+
+  @Enumerated(EnumType.STRING)
+  EventStatus status = EventStatus.RECEIVED;
+
+  int retryCount = 0;
+  String failureReason;
 }

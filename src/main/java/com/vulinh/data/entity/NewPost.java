@@ -15,6 +15,9 @@ public class NewPost extends BaseNexusEvent {
 
   @Serial private static final long serialVersionUID = 7972890117944414414L;
 
+  // Comment ID is located in the parent class (UUID id)
+  // Ctrl + Click
+
   String title;
   String excerpt;
 }

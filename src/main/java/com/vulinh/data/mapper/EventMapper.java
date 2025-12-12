@@ -20,6 +20,9 @@ public interface EventMapper {
 
   EventMapper INSTANCE = Mappers.getMapper(EventMapper.class);
 
+  @Mapping(target = "status", ignore = true)
+  @Mapping(target = "retryCount", ignore = true)
+  @Mapping(target = "failureReason", ignore = true)
   @Mapping(target = "createdDateTime", ignore = true)
   @Mapping(target = "updatedDateTime", ignore = true)
   @Mapping(target = "actionUsername", source = "event.actionUser.username")
@@ -31,6 +34,9 @@ public interface EventMapper {
   @Mapping(target = "id", source = "event.data.commentId")
   NewComment toNewCommentEntity(EventMessageWrapper<NewCommentEvent> event);
 
+  @Mapping(target = "status", ignore = true)
+  @Mapping(target = "retryCount", ignore = true)
+  @Mapping(target = "failureReason", ignore = true)
   @Mapping(target = "createdDateTime", ignore = true)
   @Mapping(target = "updatedDateTime", ignore = true)
   @Mapping(target = "actionUsername", source = "event.actionUser.username")
@@ -42,9 +48,6 @@ public interface EventMapper {
 
   @Mapping(target = "excerpt", source = "event.data.excerpt")
   @Mapping(target = "title", source = "event.data.title")
-  @Mapping(target = "status", ignore = true)
-  @Mapping(target = "retryCount", ignore = true)
-  @Mapping(target = "failureReason", ignore = true)
   @Mapping(target = "createdDateTime", ignore = true)
   @Mapping(target = "updatedDateTime", ignore = true)
   @Mapping(target = "actionUsername", source = "event.actionUser.username")
@@ -52,9 +55,6 @@ public interface EventMapper {
   NewPostFollowing toNewPostFollowingEntity(EventMessageWrapper<NewPostFollowingEvent> event);
 
   @Mapping(target = "subscribedUsername", source = "event.data.subscribedUsername")
-  @Mapping(target = "status", ignore = true)
-  @Mapping(target = "retryCount", ignore = true)
-  @Mapping(target = "failureReason", ignore = true)
   @Mapping(target = "createdDateTime", ignore = true)
   @Mapping(target = "updatedDateTime", ignore = true)
   @Mapping(target = "actionUsername", source = "event.actionUser.username")

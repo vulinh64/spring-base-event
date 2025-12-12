@@ -27,6 +27,9 @@ public abstract class BaseAuditableEvent<I extends Serializable>
 
   @LastModifiedDate Instant updatedDateTime;
 
+  // For future reference/tracking purposes
+  UUID eventId;
+
   @Override
   public final boolean equals(Object o) {
     if (this == o) {
