@@ -27,14 +27,14 @@ public abstract class BaseEventService<T> {
   private void ensureValidPayload(EventMessageWrapper<T> event) {
     var actionUser = event.actionUser();
 
-    if (ObjectUtils.allNotNull(
+    if (ObjectUtils.anyNull(
         event.eventId(), event.eventType(), event.timestamp(), event.data())) {
       throw new IllegalArgumentException("Event payload is missing required fields");
     }
 
     Objects.requireNonNull(actionUser);
 
-    if (ObjectUtils.allNotNull(actionUser.id(), actionUser.username())) {
+    if (ObjectUtils.anyNull(actionUser.id(), actionUser.username())) {
       throw new IllegalArgumentException("Action user is missing required fields");
     }
   }
