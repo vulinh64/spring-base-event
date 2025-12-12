@@ -1,5 +1,8 @@
 package com.vulinh.service;
 
+import module java.base;
+
+import com.vulinh.data.entity.NewPost;
 import com.vulinh.data.event.EventMessageWrapper;
 import com.vulinh.data.event.payload.NewPostEvent;
 import com.vulinh.data.mapper.EventMapper;
@@ -11,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class NewPostEventService extends BaseEventService<NewPostEvent> {
+public class NewPostEventService extends BaseEventService<NewPostEvent, NewPost, UUID> {
 
   final NewPostRepository newPostRepository;
 
@@ -21,7 +24,17 @@ public class NewPostEventService extends BaseEventService<NewPostEvent> {
   }
 
   @Override
-  protected void processEventInternal(EventMessageWrapper<NewPostEvent> event) {
-    newPostRepository.save(EventMapper.INSTANCE.toNewPostEntity(event));
+  protected @NonNull UUID getEntityId(@NonNull EventMessageWrapper<NewPostEvent> event) {
+    return event.data().postId();
+  }
+
+  @Override
+  protected @NonNull NewPostRepository getRepository() {
+    return newPostRepository;
+  }
+
+  @Override
+  protected @NonNull Function<EventMessageWrapper<NewPostEvent>, NewPost> getEntityConverter() {
+    return EventMapper.INSTANCE::toNewPostEntity;
   }
 }

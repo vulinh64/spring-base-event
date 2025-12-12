@@ -1,5 +1,9 @@
 package com.vulinh.service;
 
+import module java.base;
+
+import com.vulinh.data.entity.NewPostFollowing;
+import com.vulinh.data.entity.ids.NewPostFollowingId;
 import com.vulinh.data.event.EventMessageWrapper;
 import com.vulinh.data.event.payload.NewPostFollowingEvent;
 import com.vulinh.data.mapper.EventMapper;
@@ -11,7 +15,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class NewPostFollowingEventService extends BaseEventService<NewPostFollowingEvent> {
+public class NewPostFollowingEventService
+    extends BaseEventService<NewPostFollowingEvent, NewPostFollowing, NewPostFollowingId> {
 
   final NewPostFollowingRepository newPostFollowingRepository;
 
@@ -21,7 +26,22 @@ public class NewPostFollowingEventService extends BaseEventService<NewPostFollow
   }
 
   @Override
-  protected void processEventInternal(EventMessageWrapper<NewPostFollowingEvent> event) {
-    newPostFollowingRepository.save(EventMapper.INSTANCE.toNewPostFollowingEntity(event));
+  protected @NonNull NewPostFollowingId getEntityId(
+          @NonNull EventMessageWrapper<NewPostFollowingEvent> event) {
+    return NewPostFollowingId.builder()
+        .postId(event.data().postId())
+        .actionUserId(event.actionUser().id())
+        .build();
+  }
+
+  @Override
+  protected @NonNull NewPostFollowingRepository getRepository() {
+    return newPostFollowingRepository;
+  }
+
+  @Override
+  protected @NonNull Function<EventMessageWrapper<NewPostFollowingEvent>, NewPostFollowing>
+      getEntityConverter() {
+    return EventMapper.INSTANCE::toNewPostFollowingEntity;
   }
 }
