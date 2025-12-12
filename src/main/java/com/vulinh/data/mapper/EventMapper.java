@@ -40,6 +40,8 @@ public interface EventMapper {
   @Mapping(target = "id", source = "event.data.postId")
   NewPost toNewPostEntity(EventMessageWrapper<NewPostEvent> event);
 
+  @Mapping(target = "excerpt", source = "event.data.excerpt")
+  @Mapping(target = "title", source = "event.data.title")
   @Mapping(target = "status", ignore = true)
   @Mapping(target = "retryCount", ignore = true)
   @Mapping(target = "failureReason", ignore = true)
@@ -49,6 +51,7 @@ public interface EventMapper {
   @Mapping(target = "id", expression = "java(toNewPostFollowingId(event))")
   NewPostFollowing toNewPostFollowingEntity(EventMessageWrapper<NewPostFollowingEvent> event);
 
+  @Mapping(target = "subscribedUsername", source = "event.data.subscribedUsername")
   @Mapping(target = "status", ignore = true)
   @Mapping(target = "retryCount", ignore = true)
   @Mapping(target = "failureReason", ignore = true)
