@@ -37,3 +37,8 @@ else
         echo "Container [$MARIADB_CONTAINER_NAME] is already running..."
     fi
 fi
+
+chmod +x ./create-data-classes.sh
+
+# Initialize data dependency
+./create-data-classes.sh

@@ -43,4 +43,7 @@ if errorlevel 1 (
     )
 )
 
+:: Initialize data dependency
+call ./create-data-classes.cmd
+
 ENDLOCAL

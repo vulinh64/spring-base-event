@@ -9,4 +9,9 @@ fi
 
 docker compose down
 docker rmi --force spring-base:1.0.0
+
+chmod +x ./create-data-classes.sh
+
+./create-data-classes.sh
+
 docker compose up --detach

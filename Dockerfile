@@ -10,14 +10,15 @@ WORKDIR /usr/src/project
 ENV JAVA_VERSION=25
 ENV APP_NAME=app-event.jar
 ENV DEPS_FILE=deps.info
+ENV SPRING_BASE_COMMONS_VERSION=1.0.0
 
 # Copy Maven configuration files first to leverage Docker cache
 COPY pom.xml mvnw ./
 COPY .mvn/ .mvn/
 RUN chmod +x mvnw
 
-# Download dependencies (will be cached if pom.xml doesn't change)
-RUN ./mvnw dependency:go-offline
+# Copy local dependency to the local Maven repository in the build stage
+COPY build/spring-base-commons/target/spring-base-commons-${SPRING_BASE_COMMONS_VERSION}.jar /root/.m2/repository/com/vulinh/spring-base-commons/${SPRING_BASE_COMMONS_VERSION}/spring-base-commons-${SPRING_BASE_COMMONS_VERSION}.jar
 
 # Copy source code
 COPY src/ src/
