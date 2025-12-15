@@ -38,7 +38,6 @@ else
     fi
 fi
 
-chmod +x ./create-data-classes.sh
-
 # Initialize data dependency
+chmod +x ./create-data-classes.sh
 ./create-data-classes.sh
