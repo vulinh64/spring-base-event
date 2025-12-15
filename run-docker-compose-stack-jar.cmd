@@ -12,6 +12,9 @@ if errorlevel 1 (
 docker compose down
 docker rmi --force spring-base-event:1.0.0
 
+:: Initialize data dependency
+call ./create-data-classes.cmd
+
 call mvnw.cmd clean verify -DskipTests
 
 docker compose -f docker-compose-1.yml up --detach
