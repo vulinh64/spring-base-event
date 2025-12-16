@@ -9,7 +9,7 @@ import com.vulinh.data.event.payload.NewPostFollowingEvent;
 import com.vulinh.data.mapper.EventMapper;
 import com.vulinh.data.repository.NewPostFollowingRepository;
 import com.vulinh.utils.Validators;
-import lombok.NonNull;
+import io.micrometer.common.lang.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +27,7 @@ public class NewPostFollowingEventService
 
   @Override
   protected @NonNull NewPostFollowingId getEntityId(
-          @NonNull EventMessageWrapper<NewPostFollowingEvent> event) {
+      @NonNull EventMessageWrapper<NewPostFollowingEvent> event) {
     return NewPostFollowingId.builder()
         .postId(event.data().postId())
         .actionUserId(event.actionUser().id())
@@ -40,8 +40,8 @@ public class NewPostFollowingEventService
   }
 
   @Override
-  protected @NonNull Function<EventMessageWrapper<NewPostFollowingEvent>, NewPostFollowing>
-      getEntityConverter() {
-    return EventMapper.INSTANCE::toNewPostFollowingEntity;
+  protected @NonNull NewPostFollowing toEntity(
+      @NonNull EventMessageWrapper<NewPostFollowingEvent> event) {
+    return EventMapper.INSTANCE.toNewPostFollowingEntity(event);
   }
 }

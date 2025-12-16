@@ -2,7 +2,7 @@ package com.vulinh.data.entity.ids;
 
 import module java.base;
 
-import com.vulinh.data.Identifiable;
+import com.vulinh.data.base.Identifiable;
 import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 import lombok.Builder;

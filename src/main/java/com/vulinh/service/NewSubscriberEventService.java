@@ -9,8 +9,8 @@ import com.vulinh.data.event.payload.NewSubscriberEvent;
 import com.vulinh.data.mapper.EventMapper;
 import com.vulinh.data.repository.NewSubscriberRepository;
 import com.vulinh.utils.Validators;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,7 +26,8 @@ public class NewSubscriberEventService
   }
 
   @Override
-  protected @NonNull NewSubscriberId getEntityId(@NonNull EventMessageWrapper<NewSubscriberEvent> event) {
+  protected @NonNull NewSubscriberId getEntityId(
+      @NonNull EventMessageWrapper<NewSubscriberEvent> event) {
     return NewSubscriberId.builder()
         .subscribedUserId(event.data().subscribedUserId())
         .actionUserId(event.actionUser().id())
@@ -39,7 +40,7 @@ public class NewSubscriberEventService
   }
 
   @Override
-  protected @NonNull Function<EventMessageWrapper<NewSubscriberEvent>, NewSubscriber> getEntityConverter() {
-    return EventMapper.INSTANCE::toNewSubscriberEntity;
+  protected @NonNull NewSubscriber toEntity(@lombok.NonNull EventMessageWrapper<NewSubscriberEvent> event) {
+    return EventMapper.INSTANCE.toNewSubscriberEntity(event);
   }
 }
