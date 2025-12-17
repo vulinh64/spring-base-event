@@ -8,8 +8,8 @@ import com.vulinh.data.event.payload.NewPostEvent;
 import com.vulinh.data.mapper.EventMapper;
 import com.vulinh.data.repository.NewPostRepository;
 import com.vulinh.utils.Validators;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,7 +34,7 @@ public class NewPostEventService extends BaseEventService<NewPostEvent, NewPost,
   }
 
   @Override
-  protected @NonNull Function<EventMessageWrapper<NewPostEvent>, NewPost> getEntityConverter() {
-    return EventMapper.INSTANCE::toNewPostEntity;
+  protected @NonNull NewPost toEntity(@NonNull EventMessageWrapper<NewPostEvent> event) {
+    return EventMapper.INSTANCE.toNewPostEntity(event);
   }
 }

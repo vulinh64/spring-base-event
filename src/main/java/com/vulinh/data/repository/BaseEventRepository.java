@@ -2,12 +2,10 @@ package com.vulinh.data.repository;
 
 import module java.base;
 
-import com.vulinh.data.entity.BaseAuditableEvent;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.querydsl.ListQuerydslPredicateExecutor;
+import com.vulinh.data.base.AbstractTimestampAuditableEntity;
 import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
-public interface BaseEventRepository<T extends BaseAuditableEvent<I>, I extends Serializable>
-    extends JpaRepository<T, I>, JpaSpecificationExecutor<T>, ListQuerydslPredicateExecutor<T> {}
+public interface BaseEventRepository<
+        T extends AbstractTimestampAuditableEntity<I>, I extends Serializable>
+    extends BaseRepository<T, I> {}

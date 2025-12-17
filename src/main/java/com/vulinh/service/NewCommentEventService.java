@@ -8,8 +8,8 @@ import com.vulinh.data.event.payload.NewCommentEvent;
 import com.vulinh.data.mapper.EventMapper;
 import com.vulinh.data.repository.NewCommentRepository;
 import com.vulinh.utils.Validators;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,7 +26,8 @@ public class NewCommentEventService extends BaseEventService<NewCommentEvent, Ne
   }
 
   @Override
-  protected @NonNull UUID getEntityId(@NonNull EventMessageWrapper<NewCommentEvent> event) {
+  protected @org.springframework.lang.NonNull UUID getEntityId(
+      @NonNull EventMessageWrapper<NewCommentEvent> event) {
     return event.data().commentId();
   }
 
@@ -36,7 +37,7 @@ public class NewCommentEventService extends BaseEventService<NewCommentEvent, Ne
   }
 
   @Override
-  protected @NonNull Function<EventMessageWrapper<NewCommentEvent>, NewComment> getEntityConverter() {
-    return EventMapper.INSTANCE::toNewCommentEntity;
+  protected @NonNull NewComment toEntity(@NonNull EventMessageWrapper<NewCommentEvent> event) {
+    return EventMapper.INSTANCE.toNewCommentEntity(event);
   }
 }

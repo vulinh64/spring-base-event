@@ -2,7 +2,7 @@ package com.vulinh.service;
 
 import module java.base;
 
-import com.vulinh.data.entity.BaseAuditableEvent;
+import com.vulinh.data.base.AbstractTimestampAuditableEntity;
 import com.vulinh.data.event.EventMessageWrapper;
 import com.vulinh.data.exception.ValidationException;
 import com.vulinh.data.repository.BaseEventRepository;
@@ -11,7 +11,8 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.lang.NonNull;
 
 @Slf4j
-public abstract class BaseEventService<T, E extends BaseAuditableEvent<I>, I extends Serializable> {
+public abstract class BaseEventService<
+    T, E extends AbstractTimestampAuditableEntity<I>, I extends Serializable> {
 
   public void processEvent(EventMessageWrapper<T> event) {
     ensureValidPayload(event);
@@ -25,12 +26,12 @@ public abstract class BaseEventService<T, E extends BaseAuditableEvent<I>, I ext
     var repository = getRepository();
 
     if (repository.existsById(entityId)) {
-      log.info("An entity with ID {} already exists. Skipping event processing.", entityId);
+      log.info("An entity with ID {} already exists. Skipping event processing...", entityId);
 
       return;
     }
 
-    repository.save(getEntityConverter().apply(event));
+    repository.save(toEntity(event));
   }
 
   protected abstract void ensureValidData(@NonNull T data);
@@ -42,14 +43,14 @@ public abstract class BaseEventService<T, E extends BaseAuditableEvent<I>, I ext
   protected abstract BaseEventRepository<E, I> getRepository();
 
   @NonNull
-  protected abstract Function<EventMessageWrapper<T>, E> getEntityConverter();
+  protected abstract E toEntity(@NonNull EventMessageWrapper<T> event);
 
   private void ensureValidPayload(@NonNull EventMessageWrapper<T> event) {
-    var actionUser = event.actionUser();
-
     if (ObjectUtils.anyNull(event.eventId(), event.eventType(), event.timestamp(), event.data())) {
       throw new ValidationException("Event payload is missing required fields");
     }
+
+    var actionUser = event.actionUser();
 
     Objects.requireNonNull(actionUser);
 
