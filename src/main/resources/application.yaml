@@ -40,5 +40,5 @@ spring:
     password: ${RABBITMQ_PASSWORD:123456}
   threads.virtual.enabled: true
 decorator.datasource.p6spy:
-  custom-appender-class: com.vulinh.MyP6SpyLogging
+  custom-appender-class: com.vulinh.utils.MyP6SpyLogging
   logging: CUSTOM
