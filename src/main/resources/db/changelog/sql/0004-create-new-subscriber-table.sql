@@ -6,7 +6,6 @@ CREATE TABLE new_subscriber
     action_user_id      UUID        NOT NULL,
     action_username     VARCHAR(100),
     subscribed_username VARCHAR(100),
-    status              VARCHAR(20) NOT NULL DEFAULT 'RECEIVED',
     created_date_time   DATETIME(6),
     updated_date_time   DATETIME(6),
     event_id            UUID,

@@ -20,4 +20,6 @@ public abstract class BaseEvent<I extends Serializable> extends AbstractTimestam
   // Not recommended to have such a deep nested inheritance
   // Make sure to write out the duplication rule in CI/CD flows
   protected Instant timestamp;
+
+  protected UUID eventId;
 }
