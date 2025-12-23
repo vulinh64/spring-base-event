@@ -2,6 +2,7 @@ package com.vulinh.data.entity;
 
 import module java.base;
 
+import com.vulinh.data.EventStatus;
 import jakarta.persistence.Entity;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -24,4 +25,10 @@ public class NewComment extends BaseNexusEvent {
   UUID postId;
   String title;
   String excerpt;
+
+  @Override
+  public NewComment setStatus(EventStatus status) {
+    super.setStatus(status);
+    return this;
+  }
 }

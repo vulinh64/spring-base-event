@@ -9,10 +9,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 @MappedSuperclass
 @Getter
 @Setter
+@Accessors(chain = true)
 public abstract class BaseNexusEvent extends BaseEvent<UUID> {
 
   @Serial private static final long serialVersionUID = 7131473974913315938L;
