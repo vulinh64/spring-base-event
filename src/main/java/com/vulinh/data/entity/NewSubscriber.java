@@ -6,6 +6,7 @@ import com.vulinh.data.entity.ids.NewSubscriberId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 @Entity
 @NoArgsConstructor
@@ -13,6 +14,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
+@Accessors(chain = true)
 public class NewSubscriber extends BaseAssociatedEvent<NewSubscriberId> {
 
   @Serial private static final long serialVersionUID = -9010837966738525256L;

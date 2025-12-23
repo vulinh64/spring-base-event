@@ -2,7 +2,7 @@ package com.vulinh.service;
 
 import module java.base;
 
-import com.vulinh.data.base.AbstractTimestampAuditableEntity;
+import com.vulinh.data.entity.BaseEvent;
 import com.vulinh.data.event.EventMessageWrapper;
 import com.vulinh.data.exception.ValidationException;
 import com.vulinh.data.repository.BaseEventRepository;
@@ -11,8 +11,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.lang.NonNull;
 
 @Slf4j
-public abstract class BaseEventService<
-    T, E extends AbstractTimestampAuditableEntity<I>, I extends Serializable> {
+public abstract class BaseEventService<T, E extends BaseEvent<I>, I extends Serializable> {
 
   public void processEvent(EventMessageWrapper<T> event) {
     ensureValidPayload(event);

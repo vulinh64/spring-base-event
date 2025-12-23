@@ -4,6 +4,7 @@ import module java.base;
 
 import jakarta.persistence.Entity;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 @Entity
 @NoArgsConstructor
@@ -11,6 +12,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
+@Accessors(chain = true)
 public class NewComment extends BaseNexusEvent {
 
   @Serial private static final long serialVersionUID = 7378850496418460328L;

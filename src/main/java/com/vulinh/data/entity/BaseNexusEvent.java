@@ -3,7 +3,6 @@ package com.vulinh.data.entity;
 import module java.base;
 
 import com.vulinh.data.EventStatus;
-import com.vulinh.data.base.AbstractTimestampAuditableEntity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
@@ -14,7 +13,7 @@ import lombok.Setter;
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class BaseNexusEvent extends AbstractTimestampAuditableEntity<UUID> {
+public abstract class BaseNexusEvent extends BaseEvent<UUID> {
 
   @Serial private static final long serialVersionUID = 7131473974913315938L;
 

@@ -38,7 +38,7 @@ spring:
     port: ${RABBITMQ_PORT:5672}
     username: ${RABBITMQ_USERNAME:rabbitmq}
     password: ${RABBITMQ_PASSWORD:123456}
-  threads.virtual.enabled: true
+  threads.virtual.enabled: ${VIRTUAL_THREADS_ENABLED:true}
 decorator.datasource.p6spy:
   custom-appender-class: com.vulinh.utils.MyP6SpyLogging
   logging: CUSTOM
