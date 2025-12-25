@@ -4,6 +4,7 @@ import com.vulinh.data.EventStatus;
 import com.vulinh.data.entity.NewPost;
 import com.vulinh.data.entity.QNewPost;
 import com.vulinh.data.repository.NewPostRepository;
+import com.vulinh.utils.PredicateBuilder;
 import java.util.concurrent.TimeUnit;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -33,7 +34,7 @@ public interface NewPostEventScheduler {
             PageRequest.of(
                 PAGE_ZERO,
                 LIMIT_ENTRIES,
-                Sort.by(Order.asc(qNewPost.timestamp.getMetadata().getName()))))
+                Sort.by(Order.asc(PredicateBuilder.getFieldName(qNewPost.timestamp)))))
         .stream()
         .findFirst()
         .ifPresent(this::processNewPostEvents);
