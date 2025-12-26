@@ -5,7 +5,6 @@ import com.vulinh.data.entity.NewPost;
 import com.vulinh.data.entity.QNewPost;
 import com.vulinh.data.repository.NewPostRepository;
 import com.vulinh.utils.PredicateBuilder;
-import java.util.concurrent.TimeUnit;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
@@ -21,7 +20,7 @@ public interface NewPostEventScheduler {
 
   void processNewPostEvents(NewPost newPost);
 
-  @Scheduled(fixedRate = 10, timeUnit = TimeUnit.SECONDS)
+  @Scheduled(cron = "#{schedulerCron.newPostEventCron()}")
   default void processNewPostEvent() {
     var qNewPost = QNewPost.newPost;
 
