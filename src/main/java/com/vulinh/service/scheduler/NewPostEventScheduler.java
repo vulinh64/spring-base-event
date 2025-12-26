@@ -4,10 +4,8 @@ import com.vulinh.data.EventStatus;
 import com.vulinh.data.entity.NewPost;
 import com.vulinh.data.entity.QNewPost;
 import com.vulinh.data.repository.NewPostRepository;
-import com.vulinh.utils.PredicateBuilder;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Order;
+import com.vulinh.utils.QOrderBuilder;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.scheduling.annotation.Scheduled;
 
 public interface NewPostEventScheduler {
@@ -30,10 +28,7 @@ public interface NewPostEventScheduler {
                 .status
                 .notIn(EventStatus.SUCCESS, EventStatus.GIVEN_UP)
                 .and(qNewPost.retryCount.loe(MAX_RETRIES)),
-            PageRequest.of(
-                PAGE_ZERO,
-                LIMIT_ENTRIES,
-                Sort.by(Order.asc(PredicateBuilder.getFieldName(qNewPost.timestamp)))))
+            QPageRequest.of(PAGE_ZERO, LIMIT_ENTRIES, QOrderBuilder.of(qNewPost.timestamp).asc()))
         .stream()
         .findFirst()
         .ifPresent(this::processNewPostEvents);
