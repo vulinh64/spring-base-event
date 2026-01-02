@@ -2,8 +2,8 @@ package com.vulinh.service.scheduler;
 
 import module java.base;
 
-import com.vulinh.springcron.SpringCronAdapter;
-import com.vulinh.springcron.input.SpringCronInput;
+import com.vulinh.utils.springcron.SpringCronAdapter;
+import com.vulinh.utils.springcron.input.SpringCronInput;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.support.CronExpression;
 import org.springframework.stereotype.Component;
