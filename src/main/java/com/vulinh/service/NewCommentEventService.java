@@ -26,8 +26,7 @@ public class NewCommentEventService extends BaseEventService<NewCommentEvent, Ne
   }
 
   @Override
-  protected @org.springframework.lang.NonNull UUID getEntityId(
-      @NonNull EventMessageWrapper<NewCommentEvent> event) {
+  protected @NonNull UUID getEntityId(@NonNull EventMessageWrapper<NewCommentEvent> event) {
     return event.data().commentId();
   }
 
