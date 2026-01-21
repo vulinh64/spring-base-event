@@ -4,7 +4,6 @@ import module java.base;
 
 import com.vulinh.data.base.Identifiable;
 import jakarta.persistence.Embeddable;
-import java.io.Serializable;
 import lombok.Builder;
 
 // There can only be all-args canonical constructor

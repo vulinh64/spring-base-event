@@ -7,6 +7,7 @@ import com.vulinh.data.entity.NewPost;
 import com.vulinh.data.entity.QNewSubscriber;
 import com.vulinh.data.repository.NewPostRepository;
 import com.vulinh.data.repository.NewSubscriberRepository;
+import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,12 +18,17 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-@Profile("!production")
+@Profile({"!production", "!test"})
 public class DevBroadcastNewPostScheduler implements NewPostEventScheduler {
 
   @Getter final NewPostRepository newPostRepository;
 
   final NewSubscriberRepository newSubscriberRepository;
+
+  @PostConstruct
+  public void info() {
+    log.info("Scheduled task {} is enabled", getClass().getSimpleName());
+  }
 
   @Override
   public void processNewPostEvents(NewPost post) {

@@ -1,4 +1,10 @@
-application-properties.message-topic.new-post-following.topic-name: new-post-following
+application-properties.message-topic:
+  new-post-following.topic-name: new-post-following
+  new-subscriber.topic-name: new-subscriber
 spring.cloud.stream:
   default-binder: rabbit
-  bindings.newPostFollowing-out-0.destination: ${application-properties.message-topic.new-post-following.topic-name}
+  bindings:
+    newPostFollowing-out-0:
+      destination: ${application-properties.message-topic.new-post-following.topic-name}
+    newSubscriber-out-0:
+      destination: ${application-properties.message-topic.new-subscriber.topic-name}
