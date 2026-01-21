@@ -39,7 +39,7 @@
         <!-- https://mvnrepository.com/artifact/io.netty/netty-bom -->
         <netty.version>4.2.9.Final</netty.version>
 
-        <spring-base-commons.version>2.4.1</spring-base-commons.version>
+        <spring-base-commons.version>2.4.2</spring-base-commons.version>
 
         <!-- https://mvnrepository.com/artifact/org.testcontainers/junit-jupiter -->
         <testcontainers-jupiter.version>1.21.4</testcontainers-jupiter.version>
