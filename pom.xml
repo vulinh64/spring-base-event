@@ -40,6 +40,15 @@
         <netty.version>4.2.9.Final</netty.version>
 
         <spring-base-commons.version>2.4.1</spring-base-commons.version>
+
+        <!-- https://mvnrepository.com/artifact/org.testcontainers/junit-jupiter -->
+        <testcontainers-jupiter.version>1.21.4</testcontainers-jupiter.version>
+
+        <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-mariadb -->
+        <testcontainers-mariadb.version>2.0.3</testcontainers-mariadb.version>
+
+        <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-rabbitmq -->
+        <testcontainers-rabbitmq.version>2.0.3</testcontainers-rabbitmq.version>
     </properties>
 
     <dependencies>
@@ -108,6 +117,31 @@
             <artifactId>spring-base-commons</artifactId>
             <version>${spring-base-commons.version}</version>
         </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${testcontainers-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers-mariadb</artifactId>
+            <version>${testcontainers-mariadb.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers-rabbitmq</artifactId>
+            <version>${testcontainers-rabbitmq.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -155,7 +189,33 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <!-- This is needed to clear away Mockito dynamically loaded agents warning -->
+                    <argLine>
+                        -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
+                        -javaagent:${settings.localRepository}/net/bytebuddy/byte-buddy-agent/${byte-buddy.version}/byte-buddy-agent-${byte-buddy.version}.jar
+                        -Xshare:off
+                    </argLine>
+                    <includes>
+                        <include>**/*IT.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/*Test.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
 
 </project>
