@@ -29,4 +29,58 @@ public abstract class BaseNexusEvent extends BaseEvent<UUID> {
 
   int retryCount = 0;
   String failureReason;
+
+  public abstract static class BaseNexusBuilder<
+          E extends BaseNexusEvent, B extends BaseNexusBuilder<E, B>>
+      extends BaseEventBuilder<UUID, E, B> {
+
+    protected UUID id;
+    protected UUID actionUserId;
+    protected String actionUsername;
+    protected EventStatus status = EventStatus.RECEIVED;
+    protected int retryCount = 0;
+    protected String failureReason;
+
+    public B id(UUID id) {
+      this.id = id;
+      return self();
+    }
+
+    public B actionUserId(UUID actionUserId) {
+      this.actionUserId = actionUserId;
+      return self();
+    }
+
+    public B actionUsername(String actionUsername) {
+      this.actionUsername = actionUsername;
+      return self();
+    }
+
+    public B status(EventStatus status) {
+      this.status = status;
+      return self();
+    }
+
+    public B retryCount(int retryCount) {
+      this.retryCount = retryCount;
+      return self();
+    }
+
+    public B failureReason(String failureReason) {
+      this.failureReason = failureReason;
+      return self();
+    }
+
+    @Override
+    protected E populateCommonFields(E nexusEvent, B builder) {
+      nexusEvent.setActionUserId(builder.actionUserId);
+      nexusEvent.setActionUsername(builder.actionUsername);
+      nexusEvent.setStatus(builder.status);
+      nexusEvent.setRetryCount(builder.retryCount);
+      nexusEvent.setFailureReason(builder.failureReason);
+      nexusEvent.setId(id);
+
+      return super.populateCommonFields(nexusEvent, builder);
+    }
+  }
 }
