@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.9</version>
+        <version>3.5.10</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -18,37 +18,38 @@
     <properties>
         <java.version>25</java.version>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-stream-rabbit/4.3.0 -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-stream-rabbit/versions -->
         <spring-cloud-starter-stream-rabbit.version>4.3.1</spring-cloud-starter-stream-rabbit.version>
 
-        <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
+        <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct/versions -->
         <mapstruct.version>1.6.3</mapstruct.version>
 
-        <!-- https://mvnrepository.com/artifact/io.github.openfeign.querydsl/querydsl-jpa -->
+        <!-- https://mvnrepository.com/artifact/io.github.openfeign.querydsl/querydsl-jpa/versions -->
         <openfeign.querydsl.version>7.1</openfeign.querydsl.version>
 
-        <!-- https://mvnrepository.com/artifact/com.github.gavlyukovskiy/p6spy-spring-boot-starter -->
+        <!-- https://mvnrepository.com/artifact/com.github.gavlyukovskiy/p6spy-spring-boot-starter/versions -->
         <p6spy-springboot.version>1.12.1</p6spy-springboot.version>
 
-        <!-- https://mvnrepository.com/artifact/com.github.auties00/optional -->
+        <!-- https://mvnrepository.com/artifact/com.github.auties00/optional/versions -->
         <optional.version>1.0</optional.version>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3/versions -->
         <commons-lang3.version>3.20.0</commons-lang3.version>
 
-        <!-- https://mvnrepository.com/artifact/io.netty/netty-bom -->
+        <!-- https://mvnrepository.com/artifact/io.netty/netty-bom/versions -->
         <netty.version>4.2.9.Final</netty.version>
 
-        <spring-base-commons.version>2.4.2</spring-base-commons.version>
-
-        <!-- https://mvnrepository.com/artifact/org.testcontainers/junit-jupiter -->
+        <!-- https://mvnrepository.com/artifact/org.testcontainers/junit-jupiter/versions -->
         <testcontainers-jupiter.version>1.21.4</testcontainers-jupiter.version>
 
-        <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-mariadb -->
+        <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-mariadb/versions -->
         <testcontainers-mariadb.version>2.0.3</testcontainers-mariadb.version>
 
-        <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-rabbitmq -->
+        <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-rabbitmq/versions -->
         <testcontainers-rabbitmq.version>2.0.3</testcontainers-rabbitmq.version>
+
+        <!-- https://github.com/vulinh64/spring-base-commons/releases -->
+        <spring-base-commons.version>2.4.2</spring-base-commons.version>
     </properties>
 
     <dependencies>
