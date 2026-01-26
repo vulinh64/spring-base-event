@@ -22,4 +22,29 @@ public abstract class BaseEvent<I extends Serializable> extends AbstractTimestam
   protected Instant timestamp;
 
   protected UUID eventId;
+
+  protected abstract static class BaseEventBuilder<
+          I extends Serializable, E extends BaseEvent<I>, B extends BaseEventBuilder<I, E, B>>
+      implements AbstractTimestampAuditableEntity.AbstractTimestampAuditableEntityBuilder<I, E, B> {
+
+    protected Instant timestamp;
+    protected UUID eventId;
+
+    public B timestamp(Instant timestamp) {
+      this.timestamp = timestamp;
+      return self();
+    }
+
+    public B eventId(UUID eventId) {
+      this.eventId = eventId;
+      return self();
+    }
+
+    protected E populateCommonFields(E event, B builder) {
+      event.setTimestamp(timestamp);
+      event.setEventId(eventId);
+
+      return event;
+    }
+  }
 }
