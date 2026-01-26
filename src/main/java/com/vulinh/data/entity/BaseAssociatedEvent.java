@@ -27,5 +27,12 @@ public abstract class BaseAssociatedEvent<I extends Serializable> extends BaseEv
       this.actionUsername = actionUsername;
       return self();
     }
+
+    @Override
+    protected E populateCommonFields(E event, B builder) {
+      event.setActionUsername(actionUsername);
+
+      return super.populateCommonFields(event, builder);
+    }
   }
 }

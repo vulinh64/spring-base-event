@@ -1,5 +1,6 @@
 package com.vulinh.service;
 
+import com.vulinh.Commons;
 import com.vulinh.configuration.TestApplicationProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -23,8 +24,7 @@ public abstract class BaseIntegrationTest {
   protected static final RabbitMQContainer RABBITMQ =
       new RabbitMQContainer("rabbitmq:4.2.1-alpine");
 
-  @Container
-  protected static final MariaDBContainer MARIADB = new MariaDBContainer("mariadb:12.1.2-noble");
+  @Container protected static final MariaDBContainer MARIADB = new MariaDBContainer(Commons.MARIADB_IMAGE);
 
   protected static void setPropertiesInternal(DynamicPropertyRegistry registry) {
     registry.add("spring.rabbitmq.host", RABBITMQ::getHost);

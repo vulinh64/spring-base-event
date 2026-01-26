@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import module java.base;
 
+import com.vulinh.Commons;
 import com.vulinh.data.EventStatus;
 import com.vulinh.data.entity.NewComment;
 import com.vulinh.data.entity.NewSubscriber;
@@ -22,7 +23,7 @@ import org.testcontainers.mariadb.MariaDBContainer;
 @Testcontainers
 class JpaSliceTest {
 
-  @Container static final MariaDBContainer MARIADB = new MariaDBContainer("mariadb:12.1.2-noble");
+  @Container static final MariaDBContainer MARIADB = new MariaDBContainer(Commons.MARIADB_IMAGE);
 
   @Autowired NewCommentRepository newCommentRepository;
 
@@ -69,16 +70,17 @@ class JpaSliceTest {
 
   @Test
   void testNewSubscriberCreation() {
-    var data =
-        newSubscriberRepository.save(
-            NewSubscriber.builder()
-                .actionUserId(UUID.randomUUID())
-                .subscribedUserId(UUID.randomUUID())
-                .eventId(UUID.randomUUID())
-                .actionUsername("user1")
-                .subscribedUsername("user2")
-                .timestamp(Instant.now())
-                .build());
+    NewSubscriber build =
+        NewSubscriber.builder()
+            .actionUserId(UUID.randomUUID())
+            .subscribedUserId(UUID.randomUUID())
+            .eventId(UUID.randomUUID())
+            .actionUsername("user1")
+            .subscribedUsername("user2")
+            .timestamp(Instant.now())
+            .build();
+
+    var data = newSubscriberRepository.save(build);
 
     assertNotNull(data.getTimestamp());
     assertNotNull(data.getEventId());
