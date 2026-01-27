@@ -3,6 +3,7 @@ package com.vulinh.data.entity;
 import module java.base;
 
 import com.vulinh.data.base.AbstractTimestampAuditableEntity;
+import com.vulinh.utils.builder.AbstractTimestampAuditableEntityBuilder;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +26,7 @@ public abstract class BaseEvent<I extends Serializable> extends AbstractTimestam
 
   protected abstract static class BaseEventBuilder<
           I extends Serializable, E extends BaseEvent<I>, B extends BaseEventBuilder<I, E, B>>
-      implements AbstractTimestampAuditableEntity.AbstractTimestampAuditableEntityBuilder<I, E, B> {
+      implements AbstractTimestampAuditableEntityBuilder<I, E, B> {
 
     protected Instant timestamp;
     protected UUID eventId;
