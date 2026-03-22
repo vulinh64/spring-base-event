@@ -22,7 +22,7 @@ public abstract class BaseIntegrationTest {
 
   @Container
   protected static final RabbitMQContainer RABBITMQ =
-      new RabbitMQContainer("rabbitmq:4.2.1-alpine");
+      new RabbitMQContainer("rabbitmq:4.2.4-alpine");
 
   @Container protected static final MariaDBContainer MARIADB = new MariaDBContainer(Commons.MARIADB_IMAGE);
 

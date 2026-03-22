@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.11</version>
+        <version>3.5.12</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -41,17 +41,17 @@
         <testcontainers-jupiter.version>1.21.4</testcontainers-jupiter.version>
 
         <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-mariadb/versions -->
-        <testcontainers-mariadb.version>2.0.3</testcontainers-mariadb.version>
+        <testcontainers-mariadb.version>2.0.4</testcontainers-mariadb.version>
 
         <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-rabbitmq/versions -->
-        <testcontainers-rabbitmq.version>2.0.3</testcontainers-rabbitmq.version>
+        <testcontainers-rabbitmq.version>2.0.4</testcontainers-rabbitmq.version>
 
         <!-- Spring Boot should fix this soon ™ -->
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson/jackson-bom/versions -->
-        <jackson-bom.version>2.21.1</jackson-bom.version>
+        <jackson-bom.version>2.21.2</jackson-bom.version>
 
         <!-- https://github.com/vulinh64/spring-base-commons/releases -->
-        <spring-base-commons.version>2.4.6</spring-base-commons.version>
+        <spring-base-commons.version>2.5.0</spring-base-commons.version>
     </properties>
 
     <dependencies>
