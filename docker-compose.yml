@@ -21,7 +21,7 @@ services:
   mariadb:
     networks:
       - spring-base-event-network
-    image: mariadb:12.1.2-noble
+    image: mariadb:12.2.2-noble
     container_name: mariadb
     ports:
       - "3306:3306"
@@ -40,7 +40,7 @@ services:
   rabbitmq:
     networks:
       - spring-base-event-network
-    image: 'rabbitmq:4.2.1-management-alpine'
+    image: 'rabbitmq:4.2.4-alpine'
     container_name: rabbitmq
     ports:
       - "5672:5672"
