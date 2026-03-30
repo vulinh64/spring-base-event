@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 
-class NewSubscriberEventServiceIT extends BaseIntegrationTest {
+class NewSubscriberEventServiceIT extends MessageBrokerBase {
 
   static final UUID SUBSCRIBING_USER_ID = UUID.fromString("11111111-1111-1111-1111-111111111111");
   static final UUID SUBSCRIBED_USER_ID = UUID.fromString("22222222-2222-2222-2222-222222222222");
@@ -28,8 +28,8 @@ class NewSubscriberEventServiceIT extends BaseIntegrationTest {
   @Autowired NewSubscriberRepository newSubscriberRepository;
 
   @DynamicPropertySource
-  static void registerProperties(DynamicPropertyRegistry registry) {
-    setPropertiesInternal(registry);
+  static void setProperties(DynamicPropertyRegistry registry) {
+    propertiesWithRabbitMqAndMariaDb(registry);
   }
 
   @Test
@@ -47,7 +47,7 @@ class NewSubscriberEventServiceIT extends BaseIntegrationTest {
             .build();
 
     streamBridge.send(
-        testApplicationProperties.messageTopic().newSubscriber().topicName(), eventWrapper);
+        applicationProperties.messageTopic().newSubscriber().topicName(), eventWrapper);
 
     var id =
         NewSubscriberId.builder()

@@ -12,13 +12,11 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
-@Profile({"!production", "!test"})
 public class DevBroadcastNewPostScheduler implements NewPostEventScheduler {
 
   @Getter final NewPostRepository newPostRepository;

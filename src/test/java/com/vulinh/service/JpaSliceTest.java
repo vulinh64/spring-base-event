@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import module java.base;
 
-import com.vulinh.Commons;
 import com.vulinh.data.EventStatus;
 import com.vulinh.data.entity.NewComment;
 import com.vulinh.data.entity.NewSubscriber;
@@ -12,18 +11,10 @@ import com.vulinh.data.repository.NewCommentRepository;
 import com.vulinh.data.repository.NewSubscriberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.mariadb.MariaDBContainer;
 
-@DataJpaTest
-@Testcontainers
-class JpaSliceTest {
-
-  @Container static final MariaDBContainer MARIADB = new MariaDBContainer(Commons.MARIADB_IMAGE);
+class JpaSliceTest extends BaseIntegrationTest {
 
   @Autowired NewCommentRepository newCommentRepository;
 
@@ -31,9 +22,7 @@ class JpaSliceTest {
 
   @DynamicPropertySource
   static void setProperties(DynamicPropertyRegistry registry) {
-    registry.add("spring.datasource.url", MARIADB::getJdbcUrl);
-    registry.add("spring.datasource.username", MARIADB::getUsername);
-    registry.add("spring.datasource.password", MARIADB::getPassword);
+    propertiesWithMariaDb(registry);
   }
 
   @Test

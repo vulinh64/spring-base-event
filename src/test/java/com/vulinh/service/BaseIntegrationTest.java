@@ -1,36 +1,30 @@
 package com.vulinh.service;
 
 import com.vulinh.Commons;
-import com.vulinh.configuration.TestApplicationProperties;
+import com.vulinh.configuration.ApplicationProperties;
+import com.vulinh.service.scheduler.NewPostEventScheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.mariadb.MariaDBContainer;
-import org.testcontainers.rabbitmq.RabbitMQContainer;
 
 // So that the scheduled tasks won't run during tests
-@ActiveProfiles({"test", "production"})
+@ActiveProfiles("test")
 @Testcontainers(parallel = true)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@EnableConfigurationProperties(TestApplicationProperties.class)
+@EnableConfigurationProperties(ApplicationProperties.class)
 public abstract class BaseIntegrationTest {
 
   @Container
-  protected static final RabbitMQContainer RABBITMQ =
-      new RabbitMQContainer("rabbitmq:4.2.4-alpine");
+  protected static final MariaDBContainer MARIADB = new MariaDBContainer(Commons.MARIADB_IMAGE);
 
-  @Container protected static final MariaDBContainer MARIADB = new MariaDBContainer(Commons.MARIADB_IMAGE);
-
-  protected static void setPropertiesInternal(DynamicPropertyRegistry registry) {
-    registry.add("spring.rabbitmq.host", RABBITMQ::getHost);
-    registry.add("spring.rabbitmq.port", RABBITMQ::getAmqpPort);
-    registry.add("spring.rabbitmq.username", RABBITMQ::getAdminUsername);
-    registry.add("spring.rabbitmq.password", RABBITMQ::getAdminPassword);
+  protected static void propertiesWithMariaDb(DynamicPropertyRegistry registry) {
     registry.add("spring.datasource.url", MARIADB::getJdbcUrl);
     registry.add("spring.datasource.username", MARIADB::getUsername);
     registry.add("spring.datasource.password", MARIADB::getPassword);
@@ -41,5 +35,7 @@ public abstract class BaseIntegrationTest {
   // It works
   @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
   @Autowired
-  protected TestApplicationProperties testApplicationProperties;
+  protected ApplicationProperties applicationProperties;
+
+  @MockitoBean NewPostEventScheduler newPostEventScheduler;
 }

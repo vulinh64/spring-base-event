@@ -17,19 +17,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 
-class NewPostFollowingEventServiceIT extends BaseIntegrationTest {
+class NewPostFollowingEventServiceIT extends MessageBrokerBase {
 
   static final UUID POST_ID = UUID.fromString("11111111-1111-1111-1111-111111111111");
   static final UUID ACTION_USER_ID = UUID.fromString("22222222-2222-2222-2222-222222222222");
   static final String TITLE = "title-from-event";
   static final String EXCERPT = "excerpt-from-event";
 
-  @DynamicPropertySource
-  static void registerProperties(DynamicPropertyRegistry registry) {
-    setPropertiesInternal(registry);
-  }
-
   @Autowired NewPostFollowingRepository newPostFollowingRepository;
+
+  @DynamicPropertySource
+  static void setProperties(DynamicPropertyRegistry registry) {
+    propertiesWithRabbitMqAndMariaDb(registry);
+  }
 
   @Test
   void testPersistedDataMatchesEvent() {
@@ -45,8 +45,7 @@ class NewPostFollowingEventServiceIT extends BaseIntegrationTest {
                     .build())
             .build();
 
-    streamBridge.send(
-        testApplicationProperties.messageTopic().newPostFollowing().topicName(), wrapper);
+    streamBridge.send(applicationProperties.messageTopic().newPostFollowing().topicName(), wrapper);
 
     var entityId =
         NewPostFollowingId.builder().postId(POST_ID).actionUserId(ACTION_USER_ID).build();
