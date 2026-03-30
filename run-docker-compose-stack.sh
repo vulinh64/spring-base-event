@@ -8,7 +8,7 @@ if ! docker info > /dev/null 2>&1; then
 fi
 
 docker compose down
-docker rmi --force spring-base:1.0.0
+docker rmi --force spring-base-event:1.0.0
 
 chmod +x ./create-data-classes.sh
 

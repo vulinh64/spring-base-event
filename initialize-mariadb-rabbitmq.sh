@@ -4,7 +4,7 @@ RABBITMQ_CONTAINER_NAME="rabbitmq"
 RABBITMQ_NAME="rabbitmq"
 RABBITMQ_TAG="4.2.4-alpine"
 RABBITMQ_IMAGE="$RABBITMQ_NAME:$RABBITMQ_TAG"
-RABBITMQ_COMMAND="docker run --detach --name $RABBITMQ_CONTAINER_NAME --hostname rabbitmq -e RABBITMQ_DEFAULT_USER=rabbitmq -e RABBITMQ_DEFAULT_PASS=123456 -p 5672:5672 -p 15672:15672 $RABBITMQ_IMAGE"
+RABBITMQ_COMMAND="docker run --detach --name $RABBITMQ_CONTAINER_NAME --hostname rabbitmq -e RABBITMQ_DEFAULT_USER=rabbitmq -e RABBITMQ_DEFAULT_PASS=123456 -p 5672:5672 -p 15672:15672 -v rabbitmq-volume:/var/lib/rabbitmq $RABBITMQ_IMAGE"
 
 echo "Checking RabbitMQ container [$RABBITMQ_CONTAINER_NAME]..."
 if ! docker ps -a --format '{{.Names}}' | grep -w "$RABBITMQ_CONTAINER_NAME" > /dev/null; then
