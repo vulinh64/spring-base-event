@@ -17,12 +17,7 @@ mkdir -p ./build
 echo "Downloading ${JAR_FILE}..."
 curl -L -o "./build/${JAR_FILE}" "${DOWNLOAD_URL}"
 
-if [ $? -ne 0 ]; then
-    echo "Failed to download JAR file"
-    exit 1
-fi
-
-# Clean the target folder in local .m2 repository if it exists
+# Clean the local .m2 repository folder if it exists
 M2_PATH="${HOME}/.m2/repository/$(echo ${COMMONS_GROUP_ID} | tr '.' '/')/${COMMONS_NAME}/${COMMONS_VERSION}"
 
 if [ -d "${M2_PATH}" ]; then
@@ -41,10 +36,5 @@ echo "Installing ${JAR_FILE} to local Maven repository..."
     -DartifactId="${COMMONS_NAME}" \
     -Dversion="${COMMONS_VERSION}" \
     -Dpackaging=jar
-
-if [ $? -ne 0 ]; then
-    echo "Failed to install JAR file"
-    exit 1
-fi
 
 echo "Successfully installed ${COMMONS_NAME} version ${COMMONS_VERSION}"

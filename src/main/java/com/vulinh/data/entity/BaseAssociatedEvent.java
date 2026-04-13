@@ -9,6 +9,7 @@ import lombok.Setter;
 @MappedSuperclass
 @Getter
 @Setter
+@SuppressWarnings("java:S2160")
 public abstract class BaseAssociatedEvent<I extends Serializable> extends BaseEvent<I> {
 
   @Serial private static final long serialVersionUID = 371291557761709820L;
@@ -29,10 +30,10 @@ public abstract class BaseAssociatedEvent<I extends Serializable> extends BaseEv
     }
 
     @Override
-    protected E populateCommonFields(E event, B builder) {
+    protected void populateCommonFields(E event) {
       event.setActionUsername(actionUsername);
 
-      return super.populateCommonFields(event, builder);
+      super.populateCommonFields(event);
     }
   }
 }

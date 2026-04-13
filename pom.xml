@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.12</version>
+        <version>3.5.13</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -33,25 +33,24 @@
         <!-- https://mvnrepository.com/artifact/com.github.auties00/optional/versions -->
         <optional.version>1.0</optional.version>
 
-        <!-- Spring Boot should fix this soon ™ -->
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3/versions -->
         <commons-lang3.version>3.20.0</commons-lang3.version>
 
         <!-- https://mvnrepository.com/artifact/org.testcontainers/junit-jupiter/versions -->
         <testcontainers-jupiter.version>1.21.4</testcontainers-jupiter.version>
 
-        <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-mariadb/versions -->
-        <testcontainers-mariadb.version>2.0.4</testcontainers-mariadb.version>
+        <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-postgresql/versions -->
+        <testcontainers-postgresql.version>2.0.4</testcontainers-postgresql.version>
 
         <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-rabbitmq/versions -->
         <testcontainers-rabbitmq.version>2.0.4</testcontainers-rabbitmq.version>
 
-        <!-- Spring Boot should fix this soon ™ -->
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson/jackson-bom/versions -->
-        <jackson-bom.version>2.21.2</jackson-bom.version>
-
         <!-- https://github.com/vulinh64/spring-base-commons/releases -->
         <spring-base-commons.version>2.5.0</spring-base-commons.version>
+
+        <!-- Testcontainers should fix this soon ™ -->
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-compress/version -->
+        <commons-compress.version>1.28.0</commons-compress.version>
     </properties>
 
     <dependencies>
@@ -64,8 +63,8 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.mariadb.jdbc</groupId>
-            <artifactId>mariadb-java-client</artifactId>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -121,6 +120,12 @@
             <version>${spring-base-commons.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>${commons-compress.version}</version>
+        </dependency>
+
         <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -132,11 +137,17 @@
             <artifactId>junit-jupiter</artifactId>
             <version>${testcontainers-jupiter.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-compress</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
-            <artifactId>testcontainers-mariadb</artifactId>
-            <version>${testcontainers-mariadb.version}</version>
+            <artifactId>testcontainers-postgresql</artifactId>
+            <version>${testcontainers-postgresql.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

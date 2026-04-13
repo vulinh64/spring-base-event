@@ -2,7 +2,10 @@ package com.vulinh.data.entity;
 
 import module java.base;
 
-import com.vulinh.data.entity.ids.NewSubscriberId;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vulinh.data.base.Identifiable;
+import com.vulinh.data.entity.NewSubscriber.NewSubscriberId;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -15,6 +18,7 @@ import lombok.experimental.Accessors;
 @Setter
 @ToString
 @Accessors(chain = true)
+@SuppressWarnings("java:S2160")
 public class NewSubscriber extends BaseAssociatedEvent<NewSubscriberId> {
 
   @Serial private static final long serialVersionUID = -9010837966738525256L;
@@ -62,7 +66,23 @@ public class NewSubscriber extends BaseAssociatedEvent<NewSubscriberId> {
 
     @Override
     public NewSubscriber build() {
-      return populateCommonFields(new NewSubscriber(idBuilder.build(), subscribedUsername), this);
+      var object = new NewSubscriber(idBuilder.build(), subscribedUsername);
+
+      populateCommonFields(object);
+
+      return object;
+    }
+  }
+
+  @Embeddable
+  @Builder
+  public record NewSubscriberId(UUID subscribedUserId, UUID actionUserId)
+      implements Serializable, Identifiable<NewSubscriberId> {
+
+    @JsonIgnore
+    @Override
+    public NewSubscriberId getId() {
+      return this;
     }
   }
 }

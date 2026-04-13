@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import module java.base;
 
-import com.vulinh.data.entity.ids.NewPostFollowingId;
+import com.vulinh.data.entity.NewPostFollowing.NewPostFollowingId;
 import com.vulinh.data.event.ActionUser;
 import com.vulinh.data.event.EventMessageWrapper;
 import com.vulinh.data.event.EventType;
@@ -14,8 +14,6 @@ import com.vulinh.data.event.payload.NewPostFollowingEvent;
 import com.vulinh.data.repository.NewPostFollowingRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
 
 class NewPostFollowingEventServiceIT extends MessageBrokerBase {
 
@@ -25,11 +23,6 @@ class NewPostFollowingEventServiceIT extends MessageBrokerBase {
   static final String EXCERPT = "excerpt-from-event";
 
   @Autowired NewPostFollowingRepository newPostFollowingRepository;
-
-  @DynamicPropertySource
-  static void setProperties(DynamicPropertyRegistry registry) {
-    propertiesWithRabbitMqAndMariaDb(registry);
-  }
 
   @Test
   void testPersistedDataMatchesEvent() {

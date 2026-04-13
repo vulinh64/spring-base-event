@@ -1,9 +1,7 @@
 package com.vulinh.service;
 
-import module java.base;
-
 import com.vulinh.data.entity.NewPostFollowing;
-import com.vulinh.data.entity.ids.NewPostFollowingId;
+import com.vulinh.data.entity.NewPostFollowing.NewPostFollowingId;
 import com.vulinh.data.event.EventMessageWrapper;
 import com.vulinh.data.event.payload.NewPostFollowingEvent;
 import com.vulinh.data.mapper.EventMapper;

@@ -15,6 +15,7 @@ import lombok.experimental.Accessors;
 @Setter
 @ToString
 @Accessors(chain = true)
+@SuppressWarnings("java:S2160")
 public class NewPost extends BaseNexusEvent {
 
   @Serial private static final long serialVersionUID = 7972890117944414414L;
@@ -52,7 +53,11 @@ public class NewPost extends BaseNexusEvent {
 
     @Override
     public NewPost build() {
-      return populateCommonFields(new NewPost(title, excerpt), this);
+      var object = new NewPost(title, excerpt);
+
+      populateCommonBuilderFields(object, this);
+
+      return object;
     }
 
     @Override
