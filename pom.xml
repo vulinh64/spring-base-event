@@ -18,8 +18,11 @@
     <properties>
         <java.version>25</java.version>
 
+        <!-- https://github.com/vulinh64/spring-base-commons/releases -->
+        <spring-base-commons.version>2.5.0</spring-base-commons.version>
+
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-stream-rabbit/versions -->
-        <spring-cloud-starter-stream-rabbit.version>4.3.1</spring-cloud-starter-stream-rabbit.version>
+        <spring-cloud-starter-stream-rabbit.version>4.3.2</spring-cloud-starter-stream-rabbit.version>
 
         <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct/versions -->
         <mapstruct.version>1.6.3</mapstruct.version>
@@ -44,9 +47,6 @@
 
         <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-rabbitmq/versions -->
         <testcontainers-rabbitmq.version>2.0.4</testcontainers-rabbitmq.version>
-
-        <!-- https://github.com/vulinh64/spring-base-commons/releases -->
-        <spring-base-commons.version>2.5.0</spring-base-commons.version>
 
         <!-- Testcontainers should fix this soon ™ -->
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-compress/version -->
