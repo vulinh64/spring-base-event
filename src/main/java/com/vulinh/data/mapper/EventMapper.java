@@ -1,8 +1,8 @@
 package com.vulinh.data.mapper;
 
 import com.vulinh.data.entity.*;
-import com.vulinh.data.entity.ids.NewPostFollowingId;
-import com.vulinh.data.entity.ids.NewSubscriberId;
+import com.vulinh.data.entity.NewPostFollowing.NewPostFollowingId;
+import com.vulinh.data.entity.NewSubscriber.NewSubscriberId;
 import com.vulinh.data.event.*;
 import com.vulinh.data.event.payload.NewCommentEvent;
 import com.vulinh.data.event.payload.NewPostEvent;

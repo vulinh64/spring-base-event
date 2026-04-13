@@ -1,7 +1,7 @@
 package com.vulinh.data.repository;
 
 import com.vulinh.data.entity.NewPostFollowing;
-import com.vulinh.data.entity.ids.NewPostFollowingId;
+import com.vulinh.data.entity.NewPostFollowing.NewPostFollowingId;
 import org.springframework.stereotype.Repository;
 
 @Repository

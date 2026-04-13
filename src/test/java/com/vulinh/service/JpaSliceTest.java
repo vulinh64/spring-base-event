@@ -11,19 +11,11 @@ import com.vulinh.data.repository.NewCommentRepository;
 import com.vulinh.data.repository.NewSubscriberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
-
 class JpaSliceTest extends BaseIntegrationTest {
 
   @Autowired NewCommentRepository newCommentRepository;
 
   @Autowired NewSubscriberRepository newSubscriberRepository;
-
-  @DynamicPropertySource
-  static void setProperties(DynamicPropertyRegistry registry) {
-    propertiesWithMariaDb(registry);
-  }
 
   @Test
   void testNewCommentCreation() {
@@ -59,30 +51,29 @@ class JpaSliceTest extends BaseIntegrationTest {
 
   @Test
   void testNewSubscriberCreation() {
-    NewSubscriber build =
-        NewSubscriber.builder()
-            .actionUserId(UUID.randomUUID())
-            .subscribedUserId(UUID.randomUUID())
-            .eventId(UUID.randomUUID())
-            .actionUsername("user1")
-            .subscribedUsername("user2")
-            .timestamp(Instant.now())
-            .build();
+    var entity =
+        newSubscriberRepository.save(
+            NewSubscriber.builder()
+                .actionUserId(UUID.randomUUID())
+                .subscribedUserId(UUID.randomUUID())
+                .eventId(UUID.randomUUID())
+                .actionUsername("user1")
+                .subscribedUsername("user2")
+                .timestamp(Instant.now())
+                .build());
 
-    var data = newSubscriberRepository.save(build);
+    assertNotNull(entity.getTimestamp());
+    assertNotNull(entity.getEventId());
+    assertNotNull(entity.getCreatedDateTime());
+    assertNotNull(entity.getUpdatedDateTime());
 
-    assertNotNull(data.getTimestamp());
-    assertNotNull(data.getEventId());
-    assertNotNull(data.getCreatedDateTime());
-    assertNotNull(data.getUpdatedDateTime());
-
-    var id = data.getId();
+    var id = entity.getId();
 
     assertNotNull(id);
     assertNotNull(id.actionUserId());
     assertNotNull(id.subscribedUserId());
 
-    assertEquals("user1", data.getActionUsername());
-    assertEquals("user2", data.getSubscribedUsername());
+    assertEquals("user1", entity.getActionUsername());
+    assertEquals("user2", entity.getSubscribedUsername());
   }
 }

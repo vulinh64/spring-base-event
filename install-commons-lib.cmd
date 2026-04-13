@@ -20,7 +20,7 @@ IF %ERRORLEVEL% NEQ 0 (
     exit /b 1
 )
 
-:: Clean the target folder in local .m2 repository if it exists
+:: Clean the local .m2 repository folder if it exists
 SET M2_PATH=%USERPROFILE%\.m2\repository\%COMMONS_GROUP_ID:.=\%\%COMMONS_NAME%\%COMMONS_VERSION%
 
 IF EXIST "%M2_PATH%" (
