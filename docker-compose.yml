@@ -11,32 +11,31 @@ services:
       - "9088:9088"
     environment:
       - SERVER_PORT=9088
-      - MARIADB_HOST=mariadb
+      - POSTGRESQL_HOST=postgresql
       - RABBITMQ_HOST=rabbitmq
     depends_on:
-      mariadb:
+      postgresql:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
-  mariadb:
+  postgresql:
     networks:
       - spring-base-event-network
-    image: mariadb:12.2.2-noble
-    container_name: mariadb
+    image: postgres:18.3-alpine3.23
+    container_name: postgresql
     ports:
-      - "3306:3306"
+      - "5432:5432"
     environment:
-      - MARIADB_ROOT_PASSWORD=123456
-      - MARIADB_DATABASE=myspringeventdatabase
+      - POSTGRESQL_USER=postgres
+      - POSTGRESQL_PASSWORD=123456
+      - POSTGRESQL_DATABASE=spring-base-event
     volumes:
-      - mariadb-volume:/var/lib/mysql
+      - postgresql-volume:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD", "healthcheck.sh", "--connect", "--innodb_initialized" ]
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d spring-base-event" ]
       interval: 10s
       timeout: 10s
       retries: 5
-    command:
-      - --lower_case_table_names=1
   rabbitmq:
     networks:
       - spring-base-event-network
@@ -56,8 +55,8 @@ services:
       timeout: 10s
       retries: 5
 volumes:
-  mariadb-volume:
-    name: mariadb-volume
+  postgresql-volume:
+    name: postgresql-volume
   rabbitmq-volume:
     name: rabbitmq-volume
 networks:

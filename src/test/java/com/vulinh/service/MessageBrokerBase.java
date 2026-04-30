@@ -10,8 +10,8 @@ abstract class MessageBrokerBase extends BaseIntegrationTest {
   @Container
   protected static final RabbitMQContainer RABBITMQ = new RabbitMQContainer(Commons.RABBITMQ_IMAGE);
 
-  protected static void propertiesWithRabbitMqAndMariaDb(DynamicPropertyRegistry registry) {
-    propertiesWithMariaDb(registry);
+  protected static void propertiesWithRabbitMqAndPostgres(DynamicPropertyRegistry registry) {
+    propertiesWithPostgres(registry);
 
     registry.add("spring.rabbitmq.host", RABBITMQ::getHost);
     registry.add("spring.rabbitmq.port", RABBITMQ::getAmqpPort);

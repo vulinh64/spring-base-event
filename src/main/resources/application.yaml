@@ -28,9 +28,9 @@ spring:
           group: ${application-properties.binding-group}
       default-binder: rabbit
   datasource:
-    url: jdbc:mariadb://${MARIADB_HOST:localhost:${MARIADB_PORT:3306}}/${MARIADB_DATABASE:myspringeventdatabase}
-    username: ${MARIADB_USERNAME:root}
-    password: ${MARIADB_PASSWORD:123456}
+    url: jdbc:postgresql://${POSTGRESQL_HOST:localhost}:${POSTGRESQL_PORT:5432}/${POSTGRESQL_DATABASE:spring-base-event}
+    username: ${POSTGRESQL_USERNAME:postgres}
+    password: ${POSTGRESQL_PASSWORD:123456}
   liquibase.enabled: ${LIQUIBASE_ENABLED:true}
   output.ansi.enabled: ALWAYS
   rabbitmq:

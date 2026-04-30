@@ -28,7 +28,7 @@ class NewPostFollowingEventServiceIT extends MessageBrokerBase {
 
   @DynamicPropertySource
   static void setProperties(DynamicPropertyRegistry registry) {
-    propertiesWithRabbitMqAndMariaDb(registry);
+    propertiesWithRabbitMqAndPostgres(registry);
   }
 
   @Test

@@ -12,7 +12,7 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.mariadb.MariaDBContainer;
+import org.testcontainers.postgresql.PostgreSQLContainer;
 
 // So that the scheduled tasks won't run during tests
 @ActiveProfiles("test")
@@ -22,12 +22,13 @@ import org.testcontainers.mariadb.MariaDBContainer;
 public abstract class BaseIntegrationTest {
 
   @Container
-  protected static final MariaDBContainer MARIADB = new MariaDBContainer(Commons.MARIADB_IMAGE);
+  protected static final PostgreSQLContainer POSTGRESQL =
+      new PostgreSQLContainer(Commons.POSTGRESQL_IMAGE);
 
-  protected static void propertiesWithMariaDb(DynamicPropertyRegistry registry) {
-    registry.add("spring.datasource.url", MARIADB::getJdbcUrl);
-    registry.add("spring.datasource.username", MARIADB::getUsername);
-    registry.add("spring.datasource.password", MARIADB::getPassword);
+  protected static void propertiesWithPostgres(DynamicPropertyRegistry registry) {
+    registry.add("spring.datasource.url", POSTGRESQL::getJdbcUrl);
+    registry.add("spring.datasource.username", POSTGRESQL::getUsername);
+    registry.add("spring.datasource.password", POSTGRESQL::getPassword);
   }
 
   @Autowired protected StreamBridge streamBridge;

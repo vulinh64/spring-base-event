@@ -22,7 +22,7 @@ class JpaSliceTest extends BaseIntegrationTest {
 
   @DynamicPropertySource
   static void setProperties(DynamicPropertyRegistry registry) {
-    propertiesWithMariaDb(registry);
+    propertiesWithPostgres(registry);
   }
 
   @Test
