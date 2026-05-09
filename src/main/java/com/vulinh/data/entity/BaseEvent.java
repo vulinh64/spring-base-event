@@ -3,7 +3,7 @@ package com.vulinh.data.entity;
 import module java.base;
 
 import com.vulinh.data.base.AbstractTimestampAuditableEntity;
-import com.vulinh.utils.builder.AbstractTimestampAuditableEntityBuilder;
+import com.vulinh.utils.jpaentitybuilder.AbstractTimestampAuditableEntityBuilder;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,12 +1,4 @@
 server.port: ${SERVER_PORT:9088}
-application-properties:
-  binding-group: spring-base
-  # One single point for reusability
-  message-topic:
-    new-comment-topic: new-comment
-    new-post-topic: new-post
-    new-subscriber-topic: new-subscriber
-    new-post-following-topic: new-post-following
 spring:
   application.name: spring-base-event
   cloud:
@@ -15,17 +7,17 @@ spring:
     stream:
       bindings:
         newPost-in-0:
-          destination: ${application-properties.message-topic.new-post-topic}
-          group: ${application-properties.binding-group}
+          destination: ${application-properties.message-topic.new-post.topic-name}
+          group: ${spring.application.name}
         newSubscriber-in-0:
-          destination: ${application-properties.message-topic.new-subscriber-topic}
-          group: ${application-properties.binding-group}
+          destination: ${application-properties.message-topic.new-subscriber.topic-name}
+          group: ${spring.application.name}
         newComment-in-0:
-          destination: ${application-properties.message-topic.new-comment-topic}
-          group: ${application-properties.binding-group}
+          destination: ${application-properties.message-topic.new-comment.topic-name}
+          group: ${spring.application.name}
         newPostFollowing-in-0:
-          destination: ${application-properties.message-topic.new-post-following-topic}
-          group: ${application-properties.binding-group}
+          destination: ${application-properties.message-topic.new-post-following.topic-name}
+          group: ${spring.application.name}
       default-binder: rabbit
   datasource:
     url: jdbc:postgresql://${POSTGRESQL_HOST:localhost}:${POSTGRESQL_PORT:5432}/${POSTGRESQL_DATABASE:spring-base-event}

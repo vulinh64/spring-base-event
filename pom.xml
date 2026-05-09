@@ -51,7 +51,7 @@
         <jackson-bom.version>2.21.2</jackson-bom.version>
 
         <!-- https://github.com/vulinh64/spring-base-commons/releases -->
-        <spring-base-commons.version>2.5.0</spring-base-commons.version>
+        <spring-base-commons.version>3.0.2</spring-base-commons.version>
     </properties>
 
     <dependencies>
