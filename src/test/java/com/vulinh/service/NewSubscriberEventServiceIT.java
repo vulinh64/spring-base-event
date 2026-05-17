@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import module java.base;
 
+import com.vulinh.data.entity.NewSubscriber.NewSubscriberId;
 import com.vulinh.data.entity.QNewSubscriber;
-import com.vulinh.data.entity.ids.NewSubscriberId;
 import com.vulinh.data.event.ActionUser;
 import com.vulinh.data.event.EventMessageWrapper;
 import com.vulinh.data.event.EventType;
