@@ -11,10 +11,10 @@ services:
       - "9088:9088"
     environment:
       - SERVER_PORT=9088
-      - POSTGRESQL_HOST=postgresql
+      - POSTGRES_HOST=postgres
       - RABBITMQ_HOST=rabbitmq
     depends_on:
-      postgresql:
+      postgres:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
@@ -22,13 +22,13 @@ services:
     networks:
       - spring-base-event-network
     image: postgres:18.3-alpine3.23
-    container_name: postgresql
+    container_name: postgres
     ports:
       - "5432:5432"
     environment:
-      - POSTGRESQL_USER=postgres
-      - POSTGRESQL_PASSWORD=123456
-      - POSTGRESQL_DATABASE=spring-base-event
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=spring-base-event
     volumes:
       - postgresql-volume:/var/lib/postgresql/data
     healthcheck:

@@ -15,8 +15,6 @@ import com.vulinh.data.event.payload.NewSubscriberEvent;
 import com.vulinh.data.repository.NewSubscriberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
 
 class NewSubscriberEventServiceIT extends MessageBrokerBase {
 
@@ -26,11 +24,6 @@ class NewSubscriberEventServiceIT extends MessageBrokerBase {
   static final String SUBSCRIBED_USERNAME = "subscribedUser";
 
   @Autowired NewSubscriberRepository newSubscriberRepository;
-
-  @DynamicPropertySource
-  static void setProperties(DynamicPropertyRegistry registry) {
-    propertiesWithRabbitMqAndPostgres(registry);
-  }
 
   @Test
   void testNewSubscriberEvent() {

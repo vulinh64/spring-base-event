@@ -14,6 +14,7 @@ import lombok.experimental.Accessors;
 @Setter
 @ToString
 @Accessors(chain = true)
+@SuppressWarnings("java:S2160")
 public class NewComment extends BaseNexusEvent {
 
   @Serial private static final long serialVersionUID = 7378850496418460328L;
@@ -65,7 +66,11 @@ public class NewComment extends BaseNexusEvent {
 
     @Override
     public NewComment build() {
-      return populateCommonFields(new NewComment(content, postId, title, excerpt), this);
+      var object = new NewComment(content, postId, title, excerpt);
+
+      populateCommonBuilderFields(object, this);
+
+      return object;
     }
 
     @Override

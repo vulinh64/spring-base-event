@@ -2,8 +2,11 @@ package com.vulinh.data.entity;
 
 import module java.base;
 
-import com.vulinh.data.entity.ids.NewPostFollowingId;
-import com.vulinh.data.entity.ids.NewPostFollowingId.NewPostFollowingIdBuilder;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vulinh.data.base.Identifiable;
+import com.vulinh.data.entity.NewPostFollowing.NewPostFollowingId;
+import com.vulinh.data.entity.NewPostFollowing.NewPostFollowingId.NewPostFollowingIdBuilder;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -16,6 +19,7 @@ import lombok.experimental.Accessors;
 @Setter
 @ToString
 @Accessors(chain = true)
+@SuppressWarnings("java:S2160")
 public class NewPostFollowing extends BaseAssociatedEvent<NewPostFollowingId> {
 
   @Serial private static final long serialVersionUID = 894118846005326877L;
@@ -65,11 +69,28 @@ public class NewPostFollowing extends BaseAssociatedEvent<NewPostFollowingId> {
 
     @Override
     public NewPostFollowing build() {
-      return populateCommonFields(new NewPostFollowing(idBuilder.build(), title, excerpt), this);
+      var object = new NewPostFollowing(idBuilder.build(), title, excerpt);
+
+      populateCommonFields(object);
+
+      return object;
     }
 
     @Override
     public NewPostFollowingBuilder self() {
+      return this;
+    }
+  }
+
+  // There can only be all-args canonical constructor
+  @Embeddable
+  @Builder
+  public record NewPostFollowingId(UUID postId, UUID actionUserId)
+      implements Serializable, Identifiable<NewPostFollowingId> {
+
+    @JsonIgnore
+    @Override
+    public NewPostFollowingId getId() {
       return this;
     }
   }
