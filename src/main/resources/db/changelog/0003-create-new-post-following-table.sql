@@ -7,9 +7,9 @@ CREATE TABLE new_post_following
     title             VARCHAR(200),
     excerpt           TEXT,
     action_username   VARCHAR(100),
-    created_date_time DATETIME(6),
-    updated_date_time DATETIME(6),
+    created_date_time TIMESTAMPTZ(6),
+    updated_date_time TIMESTAMPTZ(6),
     event_id          UUID,
-    `timestamp`       DATETIME(6),
+    "timestamp"       TIMESTAMPTZ(6),
     PRIMARY KEY (post_id, action_user_id)
 );

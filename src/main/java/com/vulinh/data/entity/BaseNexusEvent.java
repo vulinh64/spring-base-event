@@ -15,6 +15,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
+@SuppressWarnings("java:S2160")
 public abstract class BaseNexusEvent extends BaseEvent<UUID> {
 
   @Serial private static final long serialVersionUID = 7131473974913315938L;
@@ -71,8 +72,7 @@ public abstract class BaseNexusEvent extends BaseEvent<UUID> {
       return self();
     }
 
-    @Override
-    protected E populateCommonFields(E nexusEvent, B builder) {
+    protected void populateCommonBuilderFields(E nexusEvent, B builder) {
       nexusEvent.setActionUserId(builder.actionUserId);
       nexusEvent.setActionUsername(builder.actionUsername);
       nexusEvent.setStatus(builder.status);
@@ -80,7 +80,7 @@ public abstract class BaseNexusEvent extends BaseEvent<UUID> {
       nexusEvent.setFailureReason(builder.failureReason);
       nexusEvent.setId(id);
 
-      return super.populateCommonFields(nexusEvent, builder);
+      super.populateCommonFields(nexusEvent);
     }
   }
 }

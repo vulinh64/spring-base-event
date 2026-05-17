@@ -3,7 +3,7 @@ package com.vulinh.data.entity;
 import module java.base;
 
 import com.vulinh.data.base.AbstractTimestampAuditableEntity;
-import com.vulinh.utils.builder.AbstractTimestampAuditableEntityBuilder;
+import com.vulinh.utils.jpaentitybuilder.AbstractTimestampAuditableEntityBuilder;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,8 +13,9 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-public abstract class BaseEvent<I extends Serializable> extends AbstractTimestampAuditableEntity<I>
-    implements WithTimestamp<Instant> {
+@SuppressWarnings("java:S2160")
+public abstract class BaseEvent<I extends Serializable>
+    extends AbstractTimestampAuditableEntity<I> {
 
   @Serial private static final long serialVersionUID = 4970586822583858108L;
 
@@ -41,11 +42,9 @@ public abstract class BaseEvent<I extends Serializable> extends AbstractTimestam
       return self();
     }
 
-    protected E populateCommonFields(E event, B builder) {
+    protected void populateCommonFields(E event) {
       event.setTimestamp(timestamp);
       event.setEventId(eventId);
-
-      return event;
     }
   }
 }

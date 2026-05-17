@@ -1,9 +1,7 @@
 package com.vulinh.service;
 
-import module java.base;
-
 import com.vulinh.data.entity.NewSubscriber;
-import com.vulinh.data.entity.ids.NewSubscriberId;
+import com.vulinh.data.entity.NewSubscriber.NewSubscriberId;
 import com.vulinh.data.event.EventMessageWrapper;
 import com.vulinh.data.event.payload.NewSubscriberEvent;
 import com.vulinh.data.mapper.EventMapper;
@@ -40,7 +38,8 @@ public class NewSubscriberEventService
   }
 
   @Override
-  protected @NonNull NewSubscriber toEntity(@lombok.NonNull EventMessageWrapper<NewSubscriberEvent> event) {
+  protected @NonNull NewSubscriber toEntity(
+      @lombok.NonNull EventMessageWrapper<NewSubscriberEvent> event) {
     return EventMapper.INSTANCE.toNewSubscriberEntity(event);
   }
 }

@@ -2,7 +2,7 @@
 
 SET COMMONS_NAME=spring-base-commons
 SET COMMONS_GROUP_ID=com.vulinh
-SET COMMONS_VERSION=2.5.0
+SET COMMONS_VERSION=3.0.0
 SET GITHUB_USER=vulinh64
 
 SET JAR_FILE=%COMMONS_NAME%-%COMMONS_VERSION%.jar
@@ -20,7 +20,7 @@ IF %ERRORLEVEL% NEQ 0 (
     exit /b 1
 )
 
-:: Clean the target folder in local .m2 repository if it exists
+:: Clean the local .m2 repository folder if it exists
 SET M2_PATH=%USERPROFILE%\.m2\repository\%COMMONS_GROUP_ID:.=\%\%COMMONS_NAME%\%COMMONS_VERSION%
 
 IF EXIST "%M2_PATH%" (

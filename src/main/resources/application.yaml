@@ -1,12 +1,4 @@
 server.port: ${SERVER_PORT:9088}
-application-properties:
-  binding-group: spring-base
-  # One single point for reusability
-  message-topic:
-    new-comment-topic: new-comment
-    new-post-topic: new-post
-    new-subscriber-topic: new-subscriber
-    new-post-following-topic: new-post-following
 spring:
   application.name: spring-base-event
   cloud:
@@ -15,22 +7,22 @@ spring:
     stream:
       bindings:
         newPost-in-0:
-          destination: ${application-properties.message-topic.new-post-topic}
-          group: ${application-properties.binding-group}
+          destination: ${application-properties.message-topic.new-post.topic-name}
+          group: ${spring.application.name}
         newSubscriber-in-0:
-          destination: ${application-properties.message-topic.new-subscriber-topic}
-          group: ${application-properties.binding-group}
+          destination: ${application-properties.message-topic.new-subscriber.topic-name}
+          group: ${spring.application.name}
         newComment-in-0:
-          destination: ${application-properties.message-topic.new-comment-topic}
-          group: ${application-properties.binding-group}
+          destination: ${application-properties.message-topic.new-comment.topic-name}
+          group: ${spring.application.name}
         newPostFollowing-in-0:
-          destination: ${application-properties.message-topic.new-post-following-topic}
-          group: ${application-properties.binding-group}
+          destination: ${application-properties.message-topic.new-post-following.topic-name}
+          group: ${spring.application.name}
       default-binder: rabbit
   datasource:
-    url: jdbc:mariadb://${MARIADB_HOST:localhost:${MARIADB_PORT:3306}}/${MARIADB_DATABASE:myspringeventdatabase}
-    username: ${MARIADB_USERNAME:root}
-    password: ${MARIADB_PASSWORD:123456}
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_BD:spring-base-event}
+    username: ${POSTGRES_USERNAME:postgres}
+    password: ${POSTGRES_PASSWORD:123456}
   liquibase.enabled: ${LIQUIBASE_ENABLED:true}
   output.ansi.enabled: ALWAYS
   rabbitmq:
