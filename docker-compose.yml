@@ -2,7 +2,7 @@ services:
   spring-base-event:
     networks:
       - spring-base-event-network
-    image: 'spring-base-event:1.0.0'
+    image: 'spring-base-event:3.0.0-alpha'
     container_name: spring-base-event
     build:
       context: .

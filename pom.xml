@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.13</version>
+        <version>3.5.14</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.vulinh</groupId>
     <artifactId>spring-base-event</artifactId>
-    <version>UNVERSIONED</version>
+    <version>3.0.0-alpha</version>
     <name>spring-base-event</name>
     <description>Support project</description>
 
@@ -33,10 +33,6 @@
         <!-- https://mvnrepository.com/artifact/com.github.gavlyukovskiy/p6spy-spring-boot-starter/versions -->
         <p6spy-springboot.version>1.12.1</p6spy-springboot.version>
 
-        <!-- https://mvnrepository.com/artifact/com.github.auties00/optional/versions -->
-        <optional.version>1.0</optional.version>
-
-        <!-- Spring Boot should fix this soon ™ -->
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3/versions -->
         <commons-lang3.version>3.20.0</commons-lang3.version>
 
@@ -44,14 +40,13 @@
         <testcontainers-jupiter.version>1.21.4</testcontainers-jupiter.version>
 
         <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-postgresql/versions -->
-        <testcontainers-postgresql.version>2.0.4</testcontainers-postgresql.version>
+        <testcontainers-postgresql.version>2.0.5</testcontainers-postgresql.version>
 
         <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-rabbitmq/versions -->
-        <testcontainers-rabbitmq.version>2.0.4</testcontainers-rabbitmq.version>
+        <testcontainers-rabbitmq.version>2.0.5</testcontainers-rabbitmq.version>
 
-        <!-- Spring Boot should fix this soon ™ -->
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson/jackson-bom/versions -->
-        <jackson-bom.version>2.21.2</jackson-bom.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-compress -->
+        <commons-compress.version>1.28.0</commons-compress.version>
     </properties>
 
     <dependencies>
@@ -83,12 +78,6 @@
             <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
             <version>${spring-cloud-starter-stream-rabbit.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
@@ -100,11 +89,6 @@
             <version>${p6spy-springboot.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.auties00</groupId>
-            <artifactId>optional</artifactId>
-            <version>${optional.version}</version>
-        </dependency>
-        <dependency>
             <groupId>io.github.openfeign.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
             <version>${openfeign.querydsl.version}</version>
@@ -112,6 +96,11 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
 
         <!-- Custom dependency -->
@@ -132,6 +121,19 @@
             <artifactId>junit-jupiter</artifactId>
             <version>${testcontainers-jupiter.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-compress</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Source: https://mvnrepository.com/artifact/org.apache.commons/commons-compress/versions -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>${commons-compress.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>

@@ -1,71 +1,52 @@
-# Quickstart the Application
+# spring-base-event
 
-## Table of Contents
+## Description
 
-<!-- TOC -->
-* [Quickstart the Application](#quickstart-the-application)
-  * [Table of Contents](#table-of-contents)
-  * [Running the Container Stack for Local Development](#running-the-container-stack-for-local-development)
-    * [Prerequisites](#prerequisites)
-    * [Required External Dependency](#required-external-dependency)
-    * [Dependency Version](#dependency-version)
-    * [Running the Required Containers](#running-the-required-containers)
-  * [Running the Compose Stack](#running-the-compose-stack)
-<!-- TOC -->
+The supporting service for [spring-base](https://github.com/vulinh64/spring-base).
 
-## Running the Container Stack for Local Development
+## Requirements for local debugging
 
-### Prerequisites
+| Component            | Notes                                                                                                                |
+|----------------------|----------------------------------------------------------------------------------------------------------------------|
+| JDK 25               | Required to build and run.                                                                                           |
+| Maven                | The wrapper (`mvnw` / `mvnw.cmd`) is included — no global install needed.                                            |
+| PostgreSQL           | Application database.                                                                                                |
+| RabbitMQ             | Message broker (key-rotation events, outbound notifications).                                                        |
+| Authorization server | [vulinh64/spring-base-auth](https://github.com/vulinh64/spring-base-auth) — for initializing database schemas.       |
+| Commons library      | [vulinh64/spring-base-commons](https://github.com/vulinh64/spring-base-commons) — shared data classes and utilities. |
 
-* JDK 25+ (for coding and debugging, but not necessary if running the service in containers)
-* Docker Desktop
+## Setup
 
-### Required External Dependency
+### Step 1 — Install the commons library
 
-The project uses the external dependency [spring-base-commons](https://github.com/vulinh64/spring-base-commons).
+The commons artifact is published as a GitHub release and must be installed into your local Maven repository before the project can resolve its dependencies.
 
-* For Windows, run [this script](./create-data-classes.cmd)
+- **Windows:** run [`create-data-classes.cmd`](./create-data-classes.cmd)
 
-* For Linux, run [this script](./create-data-classes.sh)
+- **Linux / macOS:** run [`create-data-classes.sh`](./create-data-classes.sh)
 
-    * Run `chmod +x ./create-data-classes.sh` if you don't have permission to execute the shell file.
+### Step 2 — Initialize PostgreSQL and RabbitMQ containers
 
-Check if your `pom.xml` contains these lines in the `<dependencies>` section:
+Only needed when running this service **standalone**. In normal operation the auth server is responsible for provisioning the shared schema (for itself, for this project, and for other downstream services), so this step is usually already done by the time you start `spring-base`.
 
-```xml
-<dependency>
-  <groupId>com.vulinh</groupId>
-  <artifactId>spring-base-commons</artifactId>
-  <version>${spring-base-commons.version}</version>
-</dependency>
-```
+- **Windows:** run [`initialize-postgres-rabbitmq.cmd`](./initialize-postgres-rabbitmq.cmd)
 
-### Dependency Version
+- **Linux / macOS:** run [`initialize-postgres-rabbitmq.sh`](./initialize-postgres-rabbitmq.sh)
 
-This project uses `spring-base-commons` as an external dependency (see above). If you want to change the version, check the following locations:
+## Configuration
 
-* [`pom.xml` file](./pom.xml) - find the property `spring-base-commons.version`.
+Sensible defaults are already wired up in [`application.yaml`](./src/main/resources/application.yaml), so the app boots out of the box against the containers from Step 2. Override any of the following environment variables when the defaults do not match your setup:
 
-* Environment variable `SPRING_BASE_COMMONS_VERSION` in:
-
-    * [Dockerfile](./Dockerfile)
-
-    * [create-data-classes.cmd](./create-data-classes.cmd) (Windows)
-
-    * [create-data-classes.sh](./create-data-classes.sh) (Linux)
-
-    * [GitHub Actions workflows](./.github/workflows/unit-test.yml) (the variable is `${{ env.SPRING_BASE_COMMONS_VERSION }}`)
-
-### Running the Required Containers
-
-You can run [this script (Windows only)](./initialize-postgres-keycloak-rabbitmq.cmd) or [this script (Linux only)](./initialize-postgres-keycloak-rabbitmq.sh), and it will start the required containers for local development: PostgreSQL and Keycloak.
-
-> Both scripts have already handled the external dependency for you. See the [Required External Dependency](#required-external-dependency) section for more information.
-
-## Running the Compose Stack
-
-You can run [this script (Windows only)](./run-docker-compose-stack.cmd), or [this script (Linux only)](./run-docker-compose-stack.sh) and it will build the service image and start the containers for you.
-
-> Again, both scripts have already handled the external dependency for you.
-
-If you want to make use of host OS to build the images (to speed up the build process), run [this script (Windows only)](./run-docker-compose-stack-jar.cmd) or [this script (Linux only)](./run-docker-compose-stack-jar.sh) instead.
+| Environment variable      | Default                                   | Remark                             |
+|---------------------------|-------------------------------------------|------------------------------------|
+| `SERVER_PORT`             | `8088`                                    | HTTP port this service listens on. |
+| `POSTGRES_HOST`           | `localhost`                               | PostgreSQL host.                   |
+| `POSTGRES_PORT`           | `5432`                                    | PostgreSQL port.                   |
+| `POSTGRES_DB`             | `spring-base`                             | Database name.                     |
+| `POSTGRES_USER`           | `postgres`                                | Database user.                     |
+| `POSTGRES_PASSWORD`       | `123456`                                  | Database password.                 |
+| `RABBITMQ_HOST`           | `localhost`                               | RabbitMQ host.                     |
+| `RABBITMQ_PORT`           | `5672`                                    | RabbitMQ AMQP port.                |
+| `RABBITMQ_USERNAME`       | `rabbitmq`                                | RabbitMQ user.                     |
+| `RABBITMQ_PASSWORD`       | `123456`                                  | RabbitMQ password.                 |
+| `VIRTUAL_THREADS_ENABLED` | `true`                                    | Enable virtual thread support.     |
