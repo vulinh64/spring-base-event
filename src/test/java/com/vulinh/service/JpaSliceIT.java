@@ -11,7 +11,8 @@ import com.vulinh.data.repository.NewCommentRepository;
 import com.vulinh.data.repository.NewSubscriberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-class JpaSliceTest extends BaseIntegrationTest {
+
+class JpaSliceIT extends BaseIntegrationTest {
 
   @Autowired NewCommentRepository newCommentRepository;
 

@@ -16,7 +16,7 @@ import com.vulinh.data.repository.NewSubscriberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class NewSubscriberEventServiceIT extends MessageBrokerBase {
+class NewSubscriberEventServiceIT extends BaseIntegrationTest {
 
   static final UUID SUBSCRIBING_USER_ID = UUID.fromString("11111111-1111-1111-1111-111111111111");
   static final UUID SUBSCRIBED_USER_ID = UUID.fromString("22222222-2222-2222-2222-222222222222");

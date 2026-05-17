@@ -13,6 +13,7 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.testcontainers.postgresql.PostgreSQLContainer;
+import org.testcontainers.rabbitmq.RabbitMQContainer;
 
 // So that the scheduled tasks won't run during tests
 @ActiveProfiles("test")
@@ -21,17 +22,25 @@ import org.testcontainers.postgresql.PostgreSQLContainer;
 public abstract class BaseIntegrationTest {
 
   protected static final PostgreSQLContainer POSTGRES =
-      new PostgreSQLContainer(Commons.POSTGRES_IMAGE);
+      new PostgreSQLContainer(Commons.POSTGRESQL_IMAGE);
+
+  protected static final RabbitMQContainer RABBITMQ =
+      new RabbitMQContainer(Commons.RABBITMQ_IMAGE);
 
   static {
     POSTGRES.start();
+    RABBITMQ.start();
   }
 
   @DynamicPropertySource
-  protected static void propertiesWithPostgres(DynamicPropertyRegistry registry) {
+  static void properties(DynamicPropertyRegistry registry) {
     registry.add("spring.datasource.url", POSTGRES::getJdbcUrl);
     registry.add("spring.datasource.username", POSTGRES::getUsername);
     registry.add("spring.datasource.password", POSTGRES::getPassword);
+    registry.add("spring.rabbitmq.host", RABBITMQ::getHost);
+    registry.add("spring.rabbitmq.port", RABBITMQ::getAmqpPort);
+    registry.add("spring.rabbitmq.username", RABBITMQ::getAdminUsername);
+    registry.add("spring.rabbitmq.password", RABBITMQ::getAdminPassword);
   }
 
   @Autowired protected StreamBridge streamBridge;

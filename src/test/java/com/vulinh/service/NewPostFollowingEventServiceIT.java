@@ -15,7 +15,7 @@ import com.vulinh.data.repository.NewPostFollowingRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class NewPostFollowingEventServiceIT extends MessageBrokerBase {
+class NewPostFollowingEventServiceIT extends BaseIntegrationTest {
 
   static final UUID POST_ID = UUID.fromString("11111111-1111-1111-1111-111111111111");
   static final UUID ACTION_USER_ID = UUID.fromString("22222222-2222-2222-2222-222222222222");
