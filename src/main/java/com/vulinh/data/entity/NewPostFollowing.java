@@ -4,6 +4,7 @@ import module java.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vulinh.data.base.Identifiable;
+import com.vulinh.data.base.JpaIdentifiable.ConcreteJpaIdentifiable;
 import com.vulinh.data.entity.NewPostFollowing.NewPostFollowingId;
 import com.vulinh.data.entity.NewPostFollowing.NewPostFollowingId.NewPostFollowingIdBuilder;
 import jakarta.persistence.Embeddable;
@@ -20,7 +21,8 @@ import lombok.experimental.Accessors;
 @ToString
 @Accessors(chain = true)
 @SuppressWarnings("java:S2160")
-public class NewPostFollowing extends BaseAssociatedEvent<NewPostFollowingId> {
+public class NewPostFollowing extends BaseAssociatedEvent<NewPostFollowingId>
+    implements ConcreteJpaIdentifiable<NewPostFollowingId> {
 
   @Serial private static final long serialVersionUID = 894118846005326877L;
 

@@ -3,6 +3,7 @@ package com.vulinh.data.entity;
 import module java.base;
 
 import com.vulinh.data.base.AbstractTimestampAuditableEntity;
+import com.vulinh.data.base.JpaIdentifiable.ConcreteJpaIdentifiable;
 import com.vulinh.utils.jpaentitybuilder.AbstractTimestampAuditableEntityBuilder;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
@@ -14,8 +15,8 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @SuppressWarnings("java:S2160")
-public abstract class BaseEvent<I extends Serializable>
-    extends AbstractTimestampAuditableEntity<I> {
+public abstract class BaseEvent<I extends Serializable> extends AbstractTimestampAuditableEntity<I>
+    implements ConcreteJpaIdentifiable<I> {
 
   @Serial private static final long serialVersionUID = 4970586822583858108L;
 

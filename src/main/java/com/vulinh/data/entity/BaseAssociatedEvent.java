@@ -2,6 +2,7 @@ package com.vulinh.data.entity;
 
 import module java.base;
 
+import com.vulinh.data.base.JpaIdentifiable.ConcreteJpaIdentifiable;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +11,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("java:S2160")
-public abstract class BaseAssociatedEvent<I extends Serializable> extends BaseEvent<I> {
+public abstract class BaseAssociatedEvent<I extends Serializable> extends BaseEvent<I>
+    implements ConcreteJpaIdentifiable<I> {
 
   @Serial private static final long serialVersionUID = 371291557761709820L;
 
