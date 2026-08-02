@@ -12,8 +12,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.testcontainers.postgresql.PostgreSQLContainer;
-import org.testcontainers.rabbitmq.RabbitMQContainer;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.containers.RabbitMQContainer;
 
 // So that the scheduled tasks won't run during tests
 @ActiveProfiles("test")
@@ -21,8 +21,8 @@ import org.testcontainers.rabbitmq.RabbitMQContainer;
 @EnableConfigurationProperties(ApplicationProperties.class)
 public abstract class BaseIntegrationTest {
 
-  protected static final PostgreSQLContainer POSTGRES =
-      new PostgreSQLContainer(Commons.POSTGRESQL_IMAGE);
+  protected static final PostgreSQLContainer<?> POSTGRES =
+      new PostgreSQLContainer<>(Commons.POSTGRESQL_IMAGE);
 
   protected static final RabbitMQContainer RABBITMQ =
       new RabbitMQContainer(Commons.RABBITMQ_IMAGE);
@@ -45,8 +45,6 @@ public abstract class BaseIntegrationTest {
 
   @Autowired protected StreamBridge streamBridge;
 
-  // It works
-  @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
   @Autowired
   protected ApplicationProperties applicationProperties;
 
