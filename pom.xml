@@ -51,6 +51,6 @@
     </dependencies>
 
     <build>
-        <finalName>app-event</finalName>
+        <finalName>app</finalName>
     </build>
 </project>
