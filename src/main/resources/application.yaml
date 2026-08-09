@@ -1,4 +1,7 @@
 server.port: ${SERVER_PORT:9088}
+application-properties:
+  p6spy:
+    max-length: 10000
 spring:
   application.name: spring-base-event
   cloud:

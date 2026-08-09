@@ -1,7 +1,9 @@
 package com.vulinh;
 
+import com.vulinh.utils.MyP6SpyLogging.Configurer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -10,6 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 // Spring Boot main class should have a public constructor if beans are to be defined later
 @SuppressWarnings("java:S1118")
+@Import(Configurer.class)
 public class SpringBaseEventApplication {
 
   static void main(String[] args) {
