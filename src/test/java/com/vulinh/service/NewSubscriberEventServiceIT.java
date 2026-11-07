@@ -51,9 +51,8 @@ class NewSubscriberEventServiceIT extends BaseIntegrationTest {
     await()
         .atMost(Duration.ofSeconds(10))
         .pollInterval(Duration.ofSeconds(2))
-        .untilAsserted(
-            () ->
-                assertTrue(newSubscriberRepository.exists(QNewSubscriber.newSubscriber.id.eq(id))));
+        .untilAsserted(() ->
+            assertTrue(newSubscriberRepository.exists(QNewSubscriber.newSubscriber.id.eq(id))));
 
     var entity = newSubscriberRepository.findById(id).orElseThrow();
 
